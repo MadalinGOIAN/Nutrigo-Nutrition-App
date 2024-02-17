@@ -31,7 +31,9 @@ public class UtilizatorController : ControllerBase
     {
         // Verificam ca numele de utilizator sa nu existe deja in sistem
         if (ListaUtilizatori.Utilizatori.Exists(u => u.NumeUtilizator == utilizator.NumeUtilizator))
+        {
             return BadRequest("Acest nume de utilizator exista deja");
+        }
 
         // Verificam ca datele introduse sa fie valide
         if (utilizator == null)
@@ -82,7 +84,7 @@ public class UtilizatorController : ControllerBase
     }
 
     [HttpDelete("{numeUtilizator}")]
-    public ActionResult StergeUtilizator(string numeUtilizator)
+    public IActionResult StergeUtilizator(string numeUtilizator)
     {
         var utilizator = ListaUtilizatori.Utilizatori.FirstOrDefault(u => u.NumeUtilizator == numeUtilizator);
 
