@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.EntityFrameworkCore.Extensions;
+using WebApi.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEntityFrameworkMySQL()
-    .AddDbContext<DbContext>(options =>
+    .AddDbContext<DbLicentaContext>(options =>
     {
         options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
     });

@@ -32,34 +32,34 @@ public class UtilizatorConectatController : ControllerBase
             NotFound("Utilizatorul cautat nu este conectat sau nu exista");
     }
 
-    [HttpPost]
-    public IActionResult ConecteazaUtilizator([FromBody] UtilizatorConectat utilizatorConectat)
-    {
-        var utilizatorExistent = ListaUtilizatori.Utilizatori.FirstOrDefault(
-            u => u.NumeUtilizator == utilizatorConectat.NumeUtilizatorConectat);
+    //[HttpPost]
+    //public IActionResult ConecteazaUtilizator([FromBody] UtilizatorConectat utilizatorConectat)
+    //{
+    //    var utilizatorExistent = ListaUtilizatori.Utilizatori.FirstOrDefault(
+    //        u => u.NumeUtilizator == utilizatorConectat.NumeUtilizatorConectat);
 
-        // Verificam ca numele de utilizator sa fie introdus corect
-        if (utilizatorExistent == null)
-        {
-            return BadRequest("Numele de utilizator introdus nu este corect");
-        }
+    //    // Verificam ca numele de utilizator sa fie introdus corect
+    //    if (utilizatorExistent == null)
+    //    {
+    //        return BadRequest("Numele de utilizator introdus nu este corect");
+    //    }
 
-        // Verificam ca utilizatorul sa nu fie conectat deja
-        if (ListaUtilizatoriConectati.UtilizatoriConectati.Exists(
-            u => u.NumeUtilizatorConectat == utilizatorExistent.NumeUtilizator))
-        {
-            return BadRequest("Utilizatorul este deja conectat");
-        }
+    //    // Verificam ca utilizatorul sa nu fie conectat deja
+    //    if (ListaUtilizatoriConectati.UtilizatoriConectati.Exists(
+    //        u => u.NumeUtilizatorConectat == utilizatorExistent.NumeUtilizator))
+    //    {
+    //        return BadRequest("Utilizatorul este deja conectat");
+    //    }
 
-        // Verificam ca parola sa fie introdusa corect
-        if (!utilizatorExistent.HashParola.Equals(utilizatorConectat.HashParola))
-        {
-            return BadRequest("Parola introdusa nu este corecta");
-        }
+    //    // Verificam ca parola sa fie introdusa corect
+    //    if (!utilizatorExistent.HashParola.Equals(utilizatorConectat.HashParola))
+    //    {
+    //        return BadRequest("Parola introdusa nu este corecta");
+    //    }
             
-        ListaUtilizatoriConectati.UtilizatoriConectati.Add(utilizatorConectat);
-        return Ok($"Utilizatorul {utilizatorConectat.NumeUtilizatorConectat} s-a conectat cu succes");
-    }
+    //    ListaUtilizatoriConectati.UtilizatoriConectati.Add(utilizatorConectat);
+    //    return Ok($"Utilizatorul {utilizatorConectat.NumeUtilizatorConectat} s-a conectat cu succes");
+    //}
 
     [HttpDelete("{numeUtilizatorConectat}")]
     public IActionResult DeconecteazaUtilizator(string numeUtilizatorConectat)
