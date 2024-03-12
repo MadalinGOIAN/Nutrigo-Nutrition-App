@@ -2,13 +2,13 @@
 
 namespace WebApi.Entities;
 
-public partial class DbLicentaContext : DbContext
+public partial class BdLicentaContext : DbContext
 {
-    public DbLicentaContext()
+    public BdLicentaContext()
     {
     }
 
-    public DbLicentaContext(DbContextOptions<DbLicentaContext> options)
+    public BdLicentaContext(DbContextOptions<BdLicentaContext> options)
         : base(options)
     {
     }

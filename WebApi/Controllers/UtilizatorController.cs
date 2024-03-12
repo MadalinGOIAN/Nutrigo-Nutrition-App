@@ -10,9 +10,9 @@ namespace WebApi.Controllers;
 [Route("api/utilizatori")]
 public class UtilizatorController : ControllerBase
 {
-    private readonly DbLicentaContext contextBd;
+    private readonly BdLicentaContext contextBd;
 
-    public UtilizatorController(DbLicentaContext contextBd)
+    public UtilizatorController(BdLicentaContext contextBd)
     {
         this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
     }
@@ -64,72 +64,92 @@ public class UtilizatorController : ControllerBase
         return utilizator != null ? Ok(utilizator) : NotFound("Utilizatorul cautat nu a fost gasit");
     }
 
-    //[HttpPost]
-    //public async Task<ActionResult<UtilizatorDTO>> InregistreazaUtilizator([FromBody] UtilizatorDTO utilizatorDTO)
-    //{
-    //    // Verificam ca numele de utilizator sa nu existe deja in sistem
-    //    if (await contextBd.Utilizatori.ToListAsync().Result.Exists(u => u.NumeUtilizator.Equals(utilizatorDTO.NumeUtilizator)))
-    //        return BadRequest("Acest nume de utilizator exista deja");
+    [HttpPost]
+    public async Task<ActionResult<UtilizatorDTO>> InregistreazaUtilizator([FromBody] UtilizatorDTO utilizatorDTO)
+    {
+        var utilizatoriExistenti = await contextBd.Utilizatori.ToListAsync();
 
-    //    // Verificam ca datele introduse sa fie valide
-    //    if (utilizator == null)
-    //    {
-    //        return BadRequest("Datele introduse sunt invalide");
-    //    }
+        // Verificam ca numele de utilizator sa nu existe deja in sistem
+        if (utilizatoriExistenti.Exists(u => u.NumeUtilizator.Equals(utilizatorDTO.NumeUtilizator)))
+            return BadRequest("Acest nume de utilizator exista deja");
 
-    //    ListaUtilizatori.Utilizatori.Add(utilizator);
-    //    return CreatedAtAction(
-    //        nameof(ObtineUtilizator),
-    //        new { numeUtilizator = utilizator.NumeUtilizator },
-    //        utilizator);
-    //}
+        // Verificam ca datele introduse sa fie valide
+        if (utilizatorDTO == null)
+            return BadRequest("Datele introduse sunt invalide");
 
-    //[HttpPut("{numeUtilizator}")]
-    //public ActionResult<Utilizator> ActualizeazaUtilizator(
-    //    string numeUtilizator,
-    //    [FromBody] Utilizator utilizatorActualizat)
-    //{
-    //    var utilizatorExistent = ListaUtilizatori.Utilizatori.FirstOrDefault(u => u.NumeUtilizator == numeUtilizator);
+        var utilizatorEntitate = new Utilizatori
+        {
+            NumeUtilizator = utilizatorDTO.NumeUtilizator,
+            HashParola = utilizatorDTO.HashParola,
+            Prenume = utilizatorDTO.Prenume,
+            NumeFamilie = utilizatorDTO.NumeFamilie,
+            Sex = utilizatorDTO.Sex,
+            Varsta = utilizatorDTO.Varsta,
+            Inaltime = utilizatorDTO.Inaltime,
+            Greutate = utilizatorDTO.Greutate,
+            NivelActivitateFizica = Convert.ToUInt32(utilizatorDTO.NivelActivitateFizica),
+            NecesarCaloric = utilizatorDTO.NecesarCaloric
+        };
 
-    //    // Verificam ca utilizatorul sa existe in sistem
-    //    if (utilizatorExistent == null)
-    //        return NotFound("Utilizatorul nu exista");
+        contextBd.Utilizatori.Add(utilizatorEntitate);
+        await contextBd.SaveChangesAsync();
+        
+        return CreatedAtAction(
+            nameof(ObtineUtilizator),
+            new { numeUtilizator = utilizatorDTO.NumeUtilizator },
+            utilizatorDTO);
+    }
 
-    //    // Verificam ca datele sa fie valide
-    //    if (utilizatorActualizat == null)
-    //    {
-    //        return BadRequest("Datele introduse sunt invalide");
-    //    }
+    [HttpPut("{numeUtilizator}")]
+    public async Task<ActionResult<UtilizatorDTO>> ActualizeazaUtilizator(
+        string numeUtilizator,
+        [FromBody] UtilizatorDTO utilizatorDTOActualizat)
+    {
+        var utilizatorExistent = await contextBd.Utilizatori.FirstOrDefaultAsync(
+            u => u.NumeUtilizator.Equals(numeUtilizator));
 
-    //    ActualizeazaUtilizatorExistent(utilizatorExistent, utilizatorActualizat);
-    //    return Ok(utilizatorExistent);
-    //}
+        // Verificam ca utilizatorul sa existe in sistem
+        if (utilizatorExistent == null)
+            return NotFound("Utilizatorul nu exista");
 
-    //private void ActualizeazaUtilizatorExistent(Utilizator utilizatorExistent, Utilizator utilizatorActualizat)
-    //{
-    //    utilizatorExistent.NumeUtilizator = utilizatorActualizat.NumeUtilizator;
-    //    utilizatorExistent.HashParola = utilizatorActualizat.HashParola;
-    //    utilizatorExistent.Prenume = utilizatorActualizat.Prenume;
-    //    utilizatorExistent.NumeFamilie = utilizatorActualizat.NumeFamilie;
-    //    utilizatorExistent.Sex = utilizatorActualizat.Sex;
-    //    utilizatorExistent.Varsta = utilizatorActualizat.Varsta;
-    //    utilizatorExistent.Inaltime = utilizatorActualizat.Inaltime;
-    //    utilizatorExistent.Greutate = utilizatorActualizat.Greutate;
-    //    utilizatorExistent.NivelActivitateFizica = utilizatorActualizat.NivelActivitateFizica;
-    //    utilizatorExistent.NecesarCaloric = utilizatorActualizat.NecesarCaloric;
-    //}
+        // Verificam ca datele sa fie valide
+        if (utilizatorDTOActualizat == null)
+            return BadRequest("Datele introduse sunt invalide");
 
-    //[HttpDelete("{numeUtilizator}")]
-    //public IActionResult StergeUtilizator(string numeUtilizator)
-    //{
-    //    var utilizator = ListaUtilizatori.Utilizatori.FirstOrDefault(u => u.NumeUtilizator == numeUtilizator);
+        ActualizeazaUtilizatorExistent(utilizatorExistent, utilizatorDTOActualizat);
+        await contextBd.SaveChangesAsync();
 
-    //    if (utilizator == null)
-    //    {
-    //        return NotFound("Utilizatorul nu a fost gasit");
-    //    }
+        return Ok(utilizatorDTOActualizat);
+    }
 
-    //    ListaUtilizatori.Utilizatori.Remove(utilizator);
-    //    return Ok("Utilizatorul a fost sters");
-    //}
+    private void ActualizeazaUtilizatorExistent(
+        Utilizatori utilizatorEntitate,
+        UtilizatorDTO utilizatorDTOActualizat)
+    {
+        utilizatorEntitate.NumeUtilizator = utilizatorDTOActualizat.NumeUtilizator;
+        utilizatorEntitate.HashParola = utilizatorDTOActualizat.HashParola;
+        utilizatorEntitate.Prenume = utilizatorDTOActualizat.Prenume;
+        utilizatorEntitate.NumeFamilie = utilizatorDTOActualizat.NumeFamilie;
+        utilizatorEntitate.Sex = utilizatorDTOActualizat.Sex;
+        utilizatorEntitate.Varsta = utilizatorDTOActualizat.Varsta;
+        utilizatorEntitate.Inaltime = utilizatorDTOActualizat.Inaltime;
+        utilizatorEntitate.Greutate = utilizatorDTOActualizat.Greutate;
+        utilizatorEntitate.NivelActivitateFizica = Convert.ToUInt32(utilizatorDTOActualizat.NivelActivitateFizica);
+        utilizatorEntitate.NecesarCaloric = utilizatorDTOActualizat.NecesarCaloric;
+    }
+
+    [HttpDelete("{numeUtilizator}")]
+    public async Task<IActionResult> StergeUtilizator(string numeUtilizator)
+    {
+        var utilizator = await contextBd.Utilizatori.FirstOrDefaultAsync(u => u.NumeUtilizator.Equals(numeUtilizator));
+
+        if (utilizator == null)
+            return NotFound("Utilizatorul nu a fost gasit");
+
+        contextBd.Utilizatori.Attach(utilizator);
+        contextBd.Utilizatori.Remove(utilizator);
+        await contextBd.SaveChangesAsync();
+
+        return Ok("Utilizatorul a fost sters");
+    }
 }
