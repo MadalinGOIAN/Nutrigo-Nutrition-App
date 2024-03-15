@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApi.DTOuri;
+using WebApi.Entities;
 
 namespace WebApi.Controllers;
 
@@ -6,73 +9,106 @@ namespace WebApi.Controllers;
 [Route("api/utilizatori/conectare")]
 public class UtilizatorConectatController : ControllerBase
 {
-    private readonly ILogger<UtilizatorConectatController> _logger;
+    private readonly BdLicentaContext contextBd;
 
-    public UtilizatorConectatController(ILogger<UtilizatorConectatController> logger)
+    public UtilizatorConectatController(BdLicentaContext contextBd)
     {
-        _logger = logger;
+        this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<UtilizatorConectat>> ObtineTotiUtilizatoriiConectati()
+    public async Task<ActionResult<IEnumerable<UtilizatorConectatDTO>>> ObtineTotiUtilizatoriiConectati()
     {
-        return ListaUtilizatoriConectati.UtilizatoriConectati.Any() ?
-            Ok(ListaUtilizatoriConectati.UtilizatoriConectati) :
-            NotFound("Nu exista utilizatori conectati");
+        var utilizatoriConectati = await contextBd.UtilizatoriConectati.Select(
+            u => new UtilizatorConectatDTO
+            {
+                NumeUtilizatorConectat = u.NumeUtilizatorConectat,
+                HashParola = u.HashParola
+            })
+            .ToListAsync();
+
+        return utilizatoriConectati.Any()
+            ? Ok(utilizatoriConectati)
+            : NotFound("Nu exista utilizatori conectati");
     }
 
     [HttpGet("{numeUtilizatorConectat}")]
-    public ActionResult<UtilizatorConectat> ObtineUtilizatorConectat(string numeUtilizatorConectat)
+    public async Task<IActionResult> ObtineUtilizatorConectat(string numeUtilizatorConectat)
     {
-        var utilizatorConectat = ListaUtilizatoriConectati.UtilizatoriConectati.FirstOrDefault(
-            u => u.NumeUtilizatorConectat == numeUtilizatorConectat);
+        var utilizatorConectat = await contextBd.UtilizatoriConectati.Select(
+            u => new UtilizatorConectatDTO
+            {
+                NumeUtilizatorConectat = u.NumeUtilizatorConectat,
+                HashParola = u.HashParola
+            })
+            .FirstOrDefaultAsync(u => u.NumeUtilizatorConectat.Equals(numeUtilizatorConectat));
 
-        return utilizatorConectat != null ?
-            Ok($"{utilizatorConectat.NumeUtilizatorConectat}: Conectat") :
-            NotFound("Utilizatorul cautat nu este conectat sau nu exista");
+        return utilizatorConectat != null
+            ? Ok($"{utilizatorConectat.NumeUtilizatorConectat}: Conectat")
+            : NotFound("Utilizatorul cautat nu este conectat sau nu exista");
     }
 
-    //[HttpPost]
-    //public IActionResult ConecteazaUtilizator([FromBody] UtilizatorConectat utilizatorConectat)
-    //{
-    //    var utilizatorExistent = ListaUtilizatori.Utilizatori.FirstOrDefault(
-    //        u => u.NumeUtilizator == utilizatorConectat.NumeUtilizatorConectat);
+    [HttpPost]
+    public async Task<IActionResult> ConecteazaUtilizator([FromBody] UtilizatorConectatDTO utilizatorConectatDTO)
+    {
+        var utilizatorExistent = await contextBd.Utilizatori.Select(
+            u => new UtilizatorDTO
+            {
+                NumeUtilizator = u.NumeUtilizator,
+                HashParola = u.HashParola
+            })
+            .FirstOrDefaultAsync(u => u.NumeUtilizator.Equals(utilizatorConectatDTO.NumeUtilizatorConectat));
 
-    //    // Verificam ca numele de utilizator sa fie introdus corect
-    //    if (utilizatorExistent == null)
-    //    {
-    //        return BadRequest("Numele de utilizator introdus nu este corect");
-    //    }
+        // Verificam ca numele de utilizator sa fie introdus corect
+        if (utilizatorExistent == null)
+            return BadRequest("Numele de utilizator introdus nu este corect");
 
-    //    // Verificam ca utilizatorul sa nu fie conectat deja
-    //    if (ListaUtilizatoriConectati.UtilizatoriConectati.Exists(
-    //        u => u.NumeUtilizatorConectat == utilizatorExistent.NumeUtilizator))
-    //    {
-    //        return BadRequest("Utilizatorul este deja conectat");
-    //    }
+        var utilizatoriConectati = await contextBd.UtilizatoriConectati.Select(
+            u => new UtilizatorConectatDTO
+            {
+                NumeUtilizatorConectat = u.NumeUtilizatorConectat,
+                HashParola = u.HashParola
+            })
+            .ToListAsync();
 
-    //    // Verificam ca parola sa fie introdusa corect
-    //    if (!utilizatorExistent.HashParola.Equals(utilizatorConectat.HashParola))
-    //    {
-    //        return BadRequest("Parola introdusa nu este corecta");
-    //    }
-            
-    //    ListaUtilizatoriConectati.UtilizatoriConectati.Add(utilizatorConectat);
-    //    return Ok($"Utilizatorul {utilizatorConectat.NumeUtilizatorConectat} s-a conectat cu succes");
-    //}
+        // Verificam ca utilizatorul sa nu fie conectat deja
+        if (utilizatoriConectati.Exists(u => u.NumeUtilizatorConectat == utilizatorExistent.NumeUtilizator))
+            return BadRequest("Utilizatorul este deja conectat");
+
+        // Verificam ca parola sa fie introdusa corect
+        if (!utilizatorExistent.HashParola.Equals(utilizatorConectatDTO.HashParola))
+            return BadRequest("Parola introdusa nu este corecta");
+
+        var utilizatorConectatEntitate = new UtilizatoriConectati
+        {
+            NumeUtilizatorConectat = utilizatorConectatDTO.NumeUtilizatorConectat,
+            HashParola = utilizatorConectatDTO.HashParola
+        };
+
+        contextBd.UtilizatoriConectati.Add(utilizatorConectatEntitate);
+        await contextBd.SaveChangesAsync();
+
+        CreatedAtAction(
+            nameof(ObtineUtilizatorConectat),
+            new { numeUtilizatorConectat = utilizatorConectatDTO.NumeUtilizatorConectat },
+            utilizatorConectatDTO);
+
+        return Ok($"Utilizatorul {utilizatorConectatDTO.NumeUtilizatorConectat} s-a conectat cu succes");
+    }
 
     [HttpDelete("{numeUtilizatorConectat}")]
-    public IActionResult DeconecteazaUtilizator(string numeUtilizatorConectat)
+    public async Task<IActionResult> DeconecteazaUtilizator(string numeUtilizatorConectat)
     {
-        var utilizatorConectat = ListaUtilizatoriConectati.UtilizatoriConectati.FirstOrDefault(
-            u => u.NumeUtilizatorConectat == numeUtilizatorConectat);
+        var utilizatorConectat = await contextBd.UtilizatoriConectati.FirstOrDefaultAsync(
+            u => u.NumeUtilizatorConectat.Equals(numeUtilizatorConectat));
 
         if (utilizatorConectat == null)
-        {
             return NotFound("Utilizatorul cautat nu este conectat sau nu exista");
-        }
 
-        ListaUtilizatoriConectati.UtilizatoriConectati.Remove(utilizatorConectat);
+        contextBd.UtilizatoriConectati.Attach(utilizatorConectat);
+        contextBd.UtilizatoriConectati.Remove(utilizatorConectat);
+        await contextBd.SaveChangesAsync();
+
         return Ok($"Utilizatorul {utilizatorConectat.NumeUtilizatorConectat} s-a deconectat cu succes");
     }
 }

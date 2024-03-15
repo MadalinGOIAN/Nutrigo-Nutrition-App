@@ -36,10 +36,9 @@ public class UtilizatorController : ControllerBase
             })
             .ToListAsync();
 
-        if (utilizatori.Any())
-            return Ok(utilizatori);
-
-        return NotFound("Nu au fost gasiti utilizatori inregistrati");
+        return utilizatori.Any()
+            ? Ok(utilizatori)
+            : NotFound("Nu au fost gasiti utilizatori inregistrati");
     }
 
     [HttpGet("{numeUtilizator}")]
@@ -61,7 +60,9 @@ public class UtilizatorController : ControllerBase
             })
             .FirstOrDefaultAsync(u => u.NumeUtilizator.Equals(numeUtilizator));
 
-        return utilizator != null ? Ok(utilizator) : NotFound("Utilizatorul cautat nu a fost gasit");
+        return utilizator != null
+            ? Ok(utilizator)
+            : NotFound("Utilizatorul cautat nu a fost gasit");
     }
 
     [HttpPost]
