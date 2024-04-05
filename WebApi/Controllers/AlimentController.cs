@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebApi.DTOuri;
+using WebApi.Entities;
 
 namespace WebApi.Controllers;
 
@@ -6,96 +9,154 @@ namespace WebApi.Controllers;
 [Route("api/alimente")]
 public class AlimentController : ControllerBase
 {
-    private readonly ILogger<AlimentController> _logger;
+    private readonly BdLicentaContext contextBd;
 
-    public AlimentController(ILogger<AlimentController> logger)
+    public AlimentController(BdLicentaContext contextBd)
     {
-        _logger = logger;
+        this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Aliment>> ObtineToateAlimentele()
+    public async Task<ActionResult<IEnumerable<AlimentDTO>>> ObtineToateAlimentele()
     {
-        return Ok(ListaAlimente.Alimente);
+        var alimente = await contextBd.Alimente.Select(
+            a => new AlimentDTO
+            {
+                Denumire = a.Denumire,
+                CodBare = a.CodBare,
+                Calorii = a.Calorii,
+                Grasimi = a.Grasimi,
+                Glucide = a.Glucide,
+                Proteine = a.Proteine
+            })
+            .ToListAsync();
+
+        return alimente.Any()
+            ? Ok(alimente)
+            : NotFound("Nu au fost gasite alimente inregistrate");
     }
 
-    [HttpGet("filtru/denumire/{denumire}")]
-    public ActionResult<Aliment> ObtineAlimentDupaDenumire(string denumire)
+    [HttpGet("denumire/{denumire}")]
+    public async Task<ActionResult<AlimentDTO>> ObtineAlimentDupaDenumire(string denumire)
     {
-        var aliment = ListaAlimente.Alimente.FirstOrDefault(a => a.Denumire == denumire);
-        return aliment != null ? Ok(aliment) : NotFound("Alimentul cautat nu a fost gasit");
+        var alimente = await contextBd.Alimente.Select(
+            a => new AlimentDTO
+            {
+                Denumire = a.Denumire,
+                CodBare = a.CodBare,
+                Calorii = a.Calorii,
+                Grasimi = a.Grasimi,
+                Glucide = a.Glucide,
+                Proteine = a.Proteine
+            })
+            .ToListAsync();
+
+        var alimenteCautate = alimente.FindAll(a => a.Denumire.ToLower().Contains(denumire.ToLower()));
+
+        return alimenteCautate.Any()
+            ? Ok(alimenteCautate)
+            : NotFound("Alimentele cautate nu a fost gasite");
     }
-    
-    [HttpGet("filtru/codbare/{codBare}")]
-    public ActionResult<Aliment> ObtineAlimentDupaCodBare(string codBare)
+
+    [HttpGet("codbare/{codBare}")]
+    public async Task<ActionResult<AlimentDTO>> ObtineAlimentDupaCodBare(string codBare)
     {
-        var aliment = ListaAlimente.Alimente.FirstOrDefault(a => a.CodBare == codBare);
-        return aliment != null ? Ok(aliment) : NotFound("Alimentul cautat nu a fost gasit");
+        var aliment = await contextBd.Alimente.Select(
+            a => new AlimentDTO
+            {
+                Denumire = a.Denumire,
+                CodBare = a.CodBare,
+                Calorii = a.Calorii,
+                Grasimi = a.Grasimi,
+                Glucide = a.Glucide,
+                Proteine = a.Proteine
+            })
+            .FirstOrDefaultAsync(a => a.CodBare.Equals(codBare));
+
+        return aliment != null 
+            ? Ok(aliment)
+            : NotFound("Alimentul cautat nu a fost gasit");
     }
 
     [HttpPost]
-    public ActionResult<Aliment> AdaugaAliment([FromBody] Aliment aliment)
+    public async Task<ActionResult<AlimentDTO>> AdaugaAliment([FromBody] AlimentDTO alimentDTO)
     {
+        var alimenteExistente = await contextBd.Alimente.ToListAsync();
+
         // Verificam ca alimentul sa nu existe deja in sistem
-        if (ListaAlimente.Alimente.Exists(a => a.Denumire == aliment.Denumire))
-        {
+        if (alimenteExistente.Exists(a => a.Denumire.Equals(alimentDTO.Denumire)))
             return BadRequest("Acest aliment exista deja");
-        }
 
         // Verificam ca datele introduse sa fie valide
-        if (aliment == null)
-        {
+        if (alimentDTO == null)
             return BadRequest("Datele introduse sunt invalide");
-        }
 
-        ListaAlimente.Alimente.Add(aliment);
-
-        if (aliment.CodBare != null)
-            CreatedAtAction(nameof(ObtineAlimentDupaCodBare), new { codBare = aliment.CodBare }, aliment);
-
-        return CreatedAtAction(nameof(ObtineAlimentDupaDenumire), new { denumire = aliment.Denumire }, aliment);
-    }
-
-    [HttpPut("{denumire}")]
-    public ActionResult<Aliment> ActualizeazaAliment(string denumire, [FromBody] Aliment alimentActualizat)
-    {
-        var alimentExistent = ListaAlimente.Alimente.FirstOrDefault(a => a.Denumire == denumire);
-
-        // Verificam ca alimentul sa existe in sistem
-        if (alimentExistent == null)
-            return NotFound("Alimentul nu exista");
-
-        // Verificam ca datele sa fie valide
-        if (alimentActualizat == null)
+        var alimentEntitate = new Alimente
         {
-            return BadRequest("Datele introduse sunt invalide");
-        }
+            Denumire = alimentDTO.Denumire,
+            CodBare = alimentDTO.CodBare,
+            Calorii = alimentDTO.Calorii,
+            Grasimi = alimentDTO.Grasimi,
+            Glucide = alimentDTO.Glucide,
+            Proteine = alimentDTO.Proteine
+        };
 
-        ActualizeazaAlimentExistent(alimentExistent, alimentActualizat);
-        return Ok(alimentExistent);
+        contextBd.Alimente.Add(alimentEntitate);
+        await contextBd.SaveChangesAsync();
+
+        if (alimentDTO.CodBare != null)
+            CreatedAtAction(
+                nameof(ObtineAlimentDupaCodBare),
+                new { codBare = alimentDTO.CodBare },
+                alimentDTO);
+
+        return CreatedAtAction(
+            nameof(ObtineAlimentDupaDenumire),
+            new { denumire = alimentDTO.Denumire },
+            alimentDTO);
     }
 
-    private void ActualizeazaAlimentExistent(Aliment alimentExistent, Aliment alimentActualizat) 
-    {
-        alimentExistent.Denumire = alimentActualizat.Denumire;
-        alimentExistent.CodBare = alimentExistent.CodBare == null ? null : alimentActualizat.CodBare;
-        alimentExistent.Calorii = alimentActualizat.Calorii;
-        alimentExistent.Grasimi = alimentActualizat.Grasimi;
-        alimentExistent.Glucide = alimentActualizat.Glucide;
-        alimentExistent.Proteine = alimentActualizat.Proteine;
-    }
+    //[HttpPut("{denumire}")]
+    //public ActionResult<Aliment> ActualizeazaAliment(string denumire, [FromBody] Aliment alimentActualizat)
+    //{
+    //    var alimentExistent = ListaAlimente.Alimente.FirstOrDefault(a => a.Denumire == denumire);
+
+    //    // Verificam ca alimentul sa existe in sistem
+    //    if (alimentExistent == null)
+    //        return NotFound("Alimentul nu exista");
+
+    //    // Verificam ca datele sa fie valide
+    //    if (alimentActualizat == null)
+    //    {
+    //        return BadRequest("Datele introduse sunt invalide");
+    //    }
+
+    //    ActualizeazaAlimentExistent(alimentExistent, alimentActualizat);
+    //    return Ok(alimentExistent);
+    //}
+
+    //private void ActualizeazaAlimentExistent(Aliment alimentExistent, Aliment alimentActualizat) 
+    //{
+    //    alimentExistent.Denumire = alimentActualizat.Denumire;
+    //    alimentExistent.CodBare = alimentExistent.CodBare == null ? null : alimentActualizat.CodBare;
+    //    alimentExistent.Calorii = alimentActualizat.Calorii;
+    //    alimentExistent.Grasimi = alimentActualizat.Grasimi;
+    //    alimentExistent.Glucide = alimentActualizat.Glucide;
+    //    alimentExistent.Proteine = alimentActualizat.Proteine;
+    //}
 
     [HttpDelete("{denumire}")]
-    public IActionResult StergeAliment(string denumire)
+    public async Task<IActionResult> StergeAliment(string denumire)
     {
-        var aliment = ListaAlimente.Alimente.FirstOrDefault(a => a.Denumire == denumire);
+        var aliment = await contextBd.Alimente.FirstOrDefaultAsync(a => a.Denumire.Equals(denumire));
 
         if (aliment == null)
-        {
             return NotFound("Alimentul nu a fost gasit");
-        }
 
-        ListaAlimente.Alimente.Remove(aliment);
+        contextBd.Alimente.Attach(aliment);
+        contextBd.Alimente.Remove(aliment);
+        await contextBd.SaveChangesAsync();
+
         return Ok("Alimentul a fost sters");
     }
 }
