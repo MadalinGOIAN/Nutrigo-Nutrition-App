@@ -123,9 +123,7 @@ public class UtilizatorController : ControllerBase
         return Ok(utilizatorDTOActualizat);
     }
 
-    private void ActualizeazaUtilizatorExistent(
-        Utilizatori utilizatorEntitate,
-        UtilizatorDTO utilizatorDTOActualizat)
+    private void ActualizeazaUtilizatorExistent(Utilizatori utilizatorEntitate, UtilizatorDTO utilizatorDTOActualizat)
     {
         utilizatorEntitate.NumeUtilizator = utilizatorDTOActualizat.NumeUtilizator;
         utilizatorEntitate.HashParola = utilizatorDTOActualizat.HashParola;

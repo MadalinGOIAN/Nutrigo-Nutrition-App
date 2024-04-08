@@ -37,7 +37,7 @@ public class AlimentController : ControllerBase
     }
 
     [HttpGet("denumire/{denumire}")]
-    public async Task<ActionResult<AlimentDTO>> ObtineAlimentDupaDenumire(string denumire)
+    public async Task<ActionResult<IEnumerable<AlimentDTO>>> ObtineAlimentDupaDenumire(string denumire)
     {
         var alimente = await contextBd.Alimente.Select(
             a => new AlimentDTO
