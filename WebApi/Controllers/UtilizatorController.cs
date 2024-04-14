@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApi.DTOuri;
 using WebApi.Entities;
 using WebApi.Tipuri;
+using WebApi.Utilitati;
 
 namespace WebApi.Controllers;
 
@@ -24,7 +25,7 @@ public class UtilizatorController : ControllerBase
             u => new UtilizatorDTO
             {
                 NumeUtilizator = u.NumeUtilizator,
-                HashParola = u.HashParola,
+                Parola = u.HashParola,
                 Prenume = u.Prenume,
                 NumeFamilie = u.NumeFamilie,
                 Sex = u.Sex,
@@ -48,7 +49,7 @@ public class UtilizatorController : ControllerBase
             u => new UtilizatorDTO
             {
                 NumeUtilizator = u.NumeUtilizator,
-                HashParola = u.HashParola,
+                Parola = u.HashParola,
                 Prenume = u.Prenume,
                 NumeFamilie = u.NumeFamilie,
                 Sex = u.Sex,
@@ -81,7 +82,7 @@ public class UtilizatorController : ControllerBase
         var utilizatorEntitate = new Utilizatori
         {
             NumeUtilizator = utilizatorDTO.NumeUtilizator,
-            HashParola = utilizatorDTO.HashParola,
+            HashParola = EncriptorParola.CripteazaParola(utilizatorDTO.Parola),
             Prenume = utilizatorDTO.Prenume,
             NumeFamilie = utilizatorDTO.NumeFamilie,
             Sex = utilizatorDTO.Sex,
@@ -126,7 +127,7 @@ public class UtilizatorController : ControllerBase
     private void ActualizeazaUtilizatorExistent(Utilizatori utilizatorEntitate, UtilizatorDTO utilizatorDTOActualizat)
     {
         utilizatorEntitate.NumeUtilizator = utilizatorDTOActualizat.NumeUtilizator;
-        utilizatorEntitate.HashParola = utilizatorDTOActualizat.HashParola;
+        utilizatorEntitate.HashParola = utilizatorDTOActualizat.Parola;
         utilizatorEntitate.Prenume = utilizatorDTOActualizat.Prenume;
         utilizatorEntitate.NumeFamilie = utilizatorDTOActualizat.NumeFamilie;
         utilizatorEntitate.Sex = utilizatorDTOActualizat.Sex;

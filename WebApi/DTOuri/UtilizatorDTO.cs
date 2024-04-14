@@ -5,7 +5,7 @@ namespace WebApi.DTOuri;
 public class UtilizatorDTO
 {
     public string? NumeUtilizator { get; set; }
-    public string? HashParola { get; set; }
+    public string? Parola { get; set; }
     public string? Prenume { get; set; }
     public string? NumeFamilie { get; set; }
     public string? Sex { get; set; }

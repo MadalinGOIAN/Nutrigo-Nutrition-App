@@ -3,5 +3,5 @@
 public class UtilizatorConectatDTO
 {
     public string? NumeUtilizatorConectat { get; set; }
-    public string? HashParola { get; set; }
+    public string? Parola { get; set; }
 }

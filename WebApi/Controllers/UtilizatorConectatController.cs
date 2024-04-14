@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.DTOuri;
 using WebApi.Entities;
+using WebApi.Utilitati;
 
 namespace WebApi.Controllers;
 
@@ -23,7 +24,7 @@ public class UtilizatorConectatController : ControllerBase
             u => new UtilizatorConectatDTO
             {
                 NumeUtilizatorConectat = u.NumeUtilizatorConectat,
-                HashParola = u.HashParola
+                Parola = u.HashParola
             })
             .ToListAsync();
 
@@ -39,7 +40,7 @@ public class UtilizatorConectatController : ControllerBase
             u => new UtilizatorConectatDTO
             {
                 NumeUtilizatorConectat = u.NumeUtilizatorConectat,
-                HashParola = u.HashParola
+                Parola = u.HashParola
             })
             .FirstOrDefaultAsync(u => u.NumeUtilizatorConectat.Equals(numeUtilizatorConectat));
 
@@ -55,7 +56,7 @@ public class UtilizatorConectatController : ControllerBase
             u => new UtilizatorDTO
             {
                 NumeUtilizator = u.NumeUtilizator,
-                HashParola = u.HashParola
+                Parola = u.HashParola
             })
             .FirstOrDefaultAsync(u => u.NumeUtilizator.Equals(utilizatorConectatDTO.NumeUtilizatorConectat));
 
@@ -67,7 +68,7 @@ public class UtilizatorConectatController : ControllerBase
             u => new UtilizatorConectatDTO
             {
                 NumeUtilizatorConectat = u.NumeUtilizatorConectat,
-                HashParola = u.HashParola
+                Parola = u.HashParola
             })
             .ToListAsync();
 
@@ -76,13 +77,13 @@ public class UtilizatorConectatController : ControllerBase
             return BadRequest("Utilizatorul este deja conectat");
 
         // Verificam ca parola sa fie introdusa corect
-        if (!utilizatorExistent.HashParola.Equals(utilizatorConectatDTO.HashParola))
+        if (!EncriptorParola.VerificaParola(utilizatorConectatDTO.Parola, utilizatorExistent.Parola))
             return BadRequest("Parola introdusa nu este corecta");
 
         var utilizatorConectatEntitate = new UtilizatoriConectati
         {
             NumeUtilizatorConectat = utilizatorConectatDTO.NumeUtilizatorConectat,
-            HashParola = utilizatorConectatDTO.HashParola
+            HashParola = utilizatorExistent.Parola
         };
 
         contextBd.UtilizatoriConectati.Add(utilizatorConectatEntitate);
