@@ -148,6 +148,22 @@ public class IstoricController : ControllerBase
         inregistrareEntitate.ProteineConsumate = inregistrareDTOActualizata.ProteineConsumate;
     }
 
+    [HttpDelete("{numeUtilizator}")]
+    public async Task<IActionResult> StergeIstoricUtilizator(string numeUtilizator)
+    {
+        var istoric = await contextBd.Istoric.ToListAsync();
+        var istoricUtilizator = istoric.FindAll(i => i.NumeUtilizator.Equals(numeUtilizator));
+
+        if (!istoricUtilizator.Any())
+            return NotFound("Nu s-au inregistrari pentru acest utilizator");
+
+        contextBd.Istoric.AttachRange(istoricUtilizator);
+        contextBd.Istoric.RemoveRange(istoricUtilizator);
+        await contextBd.SaveChangesAsync();
+
+        return Ok("Istoricul utilizatorului a fost sters");
+    }
+
     [HttpDelete("{numeUtilizator}/{data}/{denumireAliment}")]
     public async Task<IActionResult> StergeInregistrare(string numeUtilizator, DateTime data, string denumireAliment)
     {
