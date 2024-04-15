@@ -15,6 +15,7 @@ public class ServiciuInregistrare : ControllerBase
         this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
     }
 
+    // Post
     public async Task<ActionResult<UtilizatorDTO>> InregistreazaUtilizator(UtilizatorDTO utilizatorDTO)
     {
         var utilizatoriExistenti = await contextBd.Utilizatori.ToListAsync();
