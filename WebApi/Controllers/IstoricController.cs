@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.DTOuri;
 using WebApi.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApi.Controllers;
 
@@ -155,7 +154,7 @@ public class IstoricController : ControllerBase
         var istoricUtilizator = istoric.FindAll(i => i.NumeUtilizator.Equals(numeUtilizator));
 
         if (!istoricUtilizator.Any())
-            return NotFound("Nu s-au inregistrari pentru acest utilizator");
+            return NotFound("Nu s-au gasit inregistrari pentru acest utilizator");
 
         contextBd.Istoric.AttachRange(istoricUtilizator);
         contextBd.Istoric.RemoveRange(istoricUtilizator);

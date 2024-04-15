@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.EntityFrameworkCore.Extensions;
 using WebApi.Entities;
+using WebApi.Servicii;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ServiciuUtilizator>();
+builder.Services.AddScoped<ServiciuInregistrare>();
 
 builder.Services.AddEntityFrameworkMySQL()
     .AddDbContext<BdLicentaContext>(options =>
