@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ServiciuUtilizator>();
 builder.Services.AddScoped<ServiciuInregistrare>();
 builder.Services.AddScoped<ServiciuConectare>();
+builder.Services.AddScoped<ServiciuAliment>();
 
 builder.Services.AddEntityFrameworkMySQL()
     .AddDbContext<BdLicentaContext>(options =>
