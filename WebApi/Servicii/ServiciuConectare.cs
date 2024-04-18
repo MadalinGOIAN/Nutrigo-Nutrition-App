@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebApi.DTOuri;
 using WebApi.Entities;
 using WebApi.Utilitati;
@@ -9,10 +10,12 @@ namespace WebApi.Servicii;
 public class ServiciuConectare : ControllerBase
 {
     private readonly BdLicentaContext contextBd;
+    private IConfiguration configuratie;
 
-    public ServiciuConectare(BdLicentaContext contextBd)
+    public ServiciuConectare(BdLicentaContext contextBd, IConfiguration configuratie)
     {
         this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
+        this.configuratie = configuratie;
     }
 
     // Get
@@ -78,6 +81,15 @@ public class ServiciuConectare : ControllerBase
         if (!EncriptorParola.VerificaParola(utilizatorConectatDTO.Parola, utilizatorExistent.Parola))
             return BadRequest("Parola introdusa nu este corecta");
 
+        // Verificam cheia si emitentul pentru autentificare cu JWT
+        var cheie = configuratie["Jwt:Key"];
+        var emitent = configuratie["Jwt:Issuer"];
+
+        if (cheie.IsNullOrEmpty() || emitent.IsNullOrEmpty())
+            return BadRequest("Configuratie autentificare invalida");
+
+        var token = GeneratorJwt.CreeazaToken(cheie, emitent);
+
         var utilizatorConectatEntitate = new UtilizatoriConectati
         {
             NumeUtilizatorConectat = utilizatorConectatDTO.NumeUtilizatorConectat,
@@ -92,7 +104,7 @@ public class ServiciuConectare : ControllerBase
             new { numeUtilizatorConectat = utilizatorConectatDTO.NumeUtilizatorConectat },
             utilizatorConectatDTO);
 
-        return Ok($"Utilizatorul {utilizatorConectatDTO.NumeUtilizatorConectat} s-a conectat cu succes");
+        return Ok(token);
     }
 
     // Delete

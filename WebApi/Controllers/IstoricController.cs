@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOuri;
 using WebApi.Servicii;
 
@@ -15,18 +16,21 @@ public class IstoricController : ControllerBase
         this.serviciuIstoric = serviciuIstoric ?? throw new ArgumentNullException(nameof(serviciuIstoric));
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<IstoricDTO>>> ObtineTotIstoricul()
     {
         return await serviciuIstoric.ObtineTotIstoricul();
     }
 
+    [Authorize]
     [HttpGet("{numeUtilizator}")]
     public async Task<ActionResult<IEnumerable<IstoricDTO>>> ObtineIstoricUtilizator(string numeUtilizator)
     {
         return await serviciuIstoric.ObtineIstoricUtilizator(numeUtilizator);
     }
 
+    [Authorize]
     [HttpGet("{numeUtilizator}/{data}/{denumireAliment}")]
     public async Task<ActionResult<IstoricDTO>> ObtineInregistrare(
         string numeUtilizator,
@@ -36,13 +40,14 @@ public class IstoricController : ControllerBase
         return await serviciuIstoric.ObtineInregistrare(numeUtilizator, data, denumireAliment);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<IstoricDTO>> AdaugaInregistrare([FromBody] IstoricDTO istoricDTO)
     {
         return await serviciuIstoric.AdaugaInregistrare(istoricDTO);
     }
 
-    
+    [Authorize]
     [HttpPut("{numeUtilizator}/{data}/{denumireAliment}")]
     public async Task<ActionResult<IstoricDTO>> ActualizeazaInregistrare(
         string numeUtilizator,
@@ -54,12 +59,14 @@ public class IstoricController : ControllerBase
             numeUtilizator, data, denumireAliment, istoricDTOActualizat);
     }
 
+    [Authorize]
     [HttpDelete("{numeUtilizator}")]
     public async Task<IActionResult> StergeIstoricUtilizator(string numeUtilizator)
     {
         return await serviciuIstoric.StergeIstoricUtilizator(numeUtilizator);
     }
 
+    [Authorize]
     [HttpDelete("{numeUtilizator}/{data}/{denumireAliment}")]
     public async Task<IActionResult> StergeInregistrare(string numeUtilizator, DateTime data, string denumireAliment)
     {

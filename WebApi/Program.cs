@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MySql.EntityFrameworkCore.Extensions;
+using System.Text;
 using WebApi.Entities;
 using WebApi.Servicii;
 
@@ -12,16 +15,40 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Servicii
 builder.Services.AddScoped<ServiciuUtilizator>();
 builder.Services.AddScoped<ServiciuInregistrare>();
 builder.Services.AddScoped<ServiciuConectare>();
 builder.Services.AddScoped<ServiciuAliment>();
 builder.Services.AddScoped<ServiciuIstoric>();
 
-builder.Services.AddEntityFrameworkMySQL()
-    .AddDbContext<BdLicentaContext>(options =>
+// Jwt
+var cheieJwt = builder.Configuration.GetSection("Jwt:Key").Get<string>();
+var emitentJwt = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
+
+if (cheieJwt.IsNullOrEmpty() || emitentJwt.IsNullOrEmpty())
+    throw new NullReferenceException("Cheie sau emitent nul in configuratie.");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(optiuni =>
     {
-        options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+        optiuni.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = emitentJwt,
+            ValidAudience = emitentJwt,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(cheieJwt))
+        };
+    });
+
+// Azure MySql
+builder.Services.AddEntityFrameworkMySQL()
+    .AddDbContext<BdLicentaContext>(optiuni =>
+    {
+        optiuni.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
     });
 
 var app = builder.Build();
