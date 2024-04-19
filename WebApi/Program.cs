@@ -51,6 +51,17 @@ builder.Services.AddEntityFrameworkMySQL()
         optiuni.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
     });
 
+// Sesiune
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(optiuni =>
+{
+    optiuni.IdleTimeout = TimeSpan.FromMinutes(30);
+    optiuni.Cookie.HttpOnly = true;
+    optiuni.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -60,10 +71,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCookiePolicy();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllers();
 
 app.Run();

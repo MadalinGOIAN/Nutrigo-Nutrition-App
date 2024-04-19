@@ -10,11 +10,16 @@ namespace WebApi.Servicii;
 public class ServiciuConectare : ControllerBase
 {
     private readonly BdLicentaContext contextBd;
+    private readonly IHttpContextAccessor accesorContextHttp;
     private IConfiguration configuratie;
 
-    public ServiciuConectare(BdLicentaContext contextBd, IConfiguration configuratie)
+    public ServiciuConectare(
+        BdLicentaContext contextBd,
+        IHttpContextAccessor accesorContextHttp,
+        IConfiguration configuratie)
     {
         this.contextBd = contextBd ?? throw new ArgumentNullException(nameof(contextBd));
+        this.accesorContextHttp = accesorContextHttp;
         this.configuratie = configuratie;
     }
 
@@ -88,6 +93,10 @@ public class ServiciuConectare : ControllerBase
         if (cheie.IsNullOrEmpty() || emitent.IsNullOrEmpty())
             return BadRequest("Configuratie autentificare invalida");
 
+        // Start sesiune
+        accesorContextHttp.HttpContext?.Session.SetString(
+            "NumeUtilizator", utilizatorConectatDTO.NumeUtilizatorConectat);
+
         var token = GeneratorJwt.CreeazaToken(cheie, emitent);
 
         var utilizatorConectatEntitate = new UtilizatoriConectati
@@ -119,6 +128,12 @@ public class ServiciuConectare : ControllerBase
         contextBd.UtilizatoriConectati.Attach(utilizatorConectat);
         contextBd.UtilizatoriConectati.Remove(utilizatorConectat);
         await contextBd.SaveChangesAsync();
+
+        // Incheie sesiunea
+        accesorContextHttp.HttpContext?.Session.Clear();
+
+        if (accesorContextHttp.HttpContext?.Request.Cookies[".AspNetCore.Session"] != null)
+            accesorContextHttp.HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
 
         return Ok($"Utilizatorul {utilizatorConectat.NumeUtilizatorConectat} s-a deconectat cu succes");
     }
