@@ -1,12 +1,13 @@
-﻿namespace MobileApp
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
+﻿using MobileApp.Views;
 
-            MainPage = new AppShell();
-        }
+namespace MobileApp;
+
+public partial class App : Application
+{
+    public App()
+    {
+        InitializeComponent();
+
+        MainPage = new PaginaConectare();
     }
 }
