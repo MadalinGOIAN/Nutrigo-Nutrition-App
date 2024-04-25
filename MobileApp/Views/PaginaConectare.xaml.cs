@@ -6,4 +6,14 @@ public partial class PaginaConectare : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BtnConectare_Clicked(object sender, EventArgs e)
+    {
+		Application.Current.MainPage = new PaginaPrincipala();
+    }
+
+    private void BtnInregistrare_Clicked(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new PaginaInregistrare();
+    }
 }

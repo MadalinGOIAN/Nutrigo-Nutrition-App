@@ -1,15 +1,94 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MobileApp.Views.PaginaConectare"
-             Title="PaginaConectare">
+             Title="PaginaConectare"
+             BackgroundColor="#3E57B2">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#283D88" />
+    </ContentPage.Behaviors>
     
-    <VerticalStackLayout>
-        <Label Text="Pagina conectare"
-               VerticalOptions="Center" 
-               HorizontalOptions="Center"/>
+    <VerticalStackLayout Padding="0">
+        <Image Source="logo.svg"
+               Margin="60"/>
 
-        <Button Text="Conectează-te"/>
+        <Frame BackgroundColor="#283D88"
+               BorderColor="Transparent"
+               Margin="60, 0"
+               HasShadow="True"
+               Padding="45,15">
 
+            <StackLayout>
+                <Label Text="Autentificare"
+                       TextColor="White"
+                       FontSize="22"
+                       HorizontalTextAlignment="Start"
+                       Padding="0"/>
+
+                <Label Text="Nume de utilizator:"
+                       TextColor="White"
+                       FontSize="14"
+                       HorizontalTextAlignment="Start"
+                       Padding="0,25,0,0"/>
+
+                <Frame BorderColor="Transparent"
+                       HeightRequest="30"
+                       Padding="0">
+
+                    <Entry TextColor="#283D88"
+                           FontSize="16"
+                           Keyboard="Text"
+                           Margin="5"/>
+                </Frame>
+
+                <Label Text="Parola:"
+                       TextColor="White"
+                       FontSize="14"
+                       HorizontalTextAlignment="Start"
+                       Padding="0,10,0,0"/>
+
+                <Frame BorderColor="Transparent"
+                       HeightRequest="30"
+                       Padding="0">
+
+                    <Entry TextColor="#283D88"
+                           FontSize="16"
+                           Keyboard="Text"
+                           IsPassword="True"
+                           Margin="5"/>
+                </Frame>
+
+                <Button Text="Intră în cont"
+                        BackgroundColor="#E6AE41"
+                        HeightRequest="40"
+                        Padding="0"
+                        Clicked="BtnConectare_Clicked"
+                        Margin="0,40,0,0"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Nu ai cont?"
+                           TextColor="White"
+                           FontSize="9.5"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"/>
+
+                    <Button Grid.Column="1"
+                            Text="Înregistrează-te"
+                            TextColor="#E6AE41"
+                            BackgroundColor="Transparent"
+                            FontSize="9.5"
+                            HeightRequest="30"
+                            Clicked="BtnInregistrare_Clicked"
+                            Padding="8,0"/>
+                </Grid>
+            </StackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

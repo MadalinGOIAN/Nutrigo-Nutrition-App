@@ -115,7 +115,7 @@
 
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="FontFamily" Value="InterBlack"/>
         <Setter Property="FontAttributes" Value="Italic"/>
         <Setter Property="FontSize" Value="14" />
