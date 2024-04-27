@@ -210,7 +210,7 @@
     <Style TargetType="Picker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="FontFamily" Value="InterBlack"/>
         <Setter Property="FontAttributes" Value="Italic"/>
         <Setter Property="FontSize" Value="14"/>

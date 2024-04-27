@@ -33,6 +33,17 @@ public static class MauiProgram
 #endif
             });
 
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(
+            "PickerPersonalizat",
+            (manipulator, element) =>
+            {
+#if ANDROID
+                manipulator.PlatformView.BackgroundTintList =
+                    Android.Content.Res.ColorStateList.ValueOf(Colors.White.ToAndroid());
+                manipulator.PlatformView.SetPadding(0, 0, 0, 0);
+#endif
+            });
+
         return builder.Build();
     }
 }

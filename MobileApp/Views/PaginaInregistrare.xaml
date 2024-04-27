@@ -2,16 +2,290 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaInregistrare"
-             Title="PaginaInregistrare">
-    <VerticalStackLayout>
-        <Label Text="Pagina inregistrare"
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" />
+             Title="PaginaInregistrare"
+             BackgroundColor="#3E57B2">
 
-        <Button Text="Înregistrează-te"
-                Clicked="BtnInregistrare_Clicked"/>
-        
-        <Button Text="Conectează-te"
-                Clicked="BtnConectare_Clicked"/>
-    </VerticalStackLayout>
+    <Frame BackgroundColor="#283D88"
+               BorderColor="Transparent"
+               Margin="60, 20"
+               HasShadow="True"
+               Padding="45,15">
+
+        <StackLayout>
+            <Label Text="Înregistrare"
+                   TextColor="White"
+                   FontSize="22"
+                   HorizontalTextAlignment="Center"
+                   Padding="0"/>
+
+            <Label Text="Nume de utilizator:"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,25,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Entry TextColor="#283D88"
+                       FontSize="16"
+                       Keyboard="Text"
+                       Margin="5"/>
+            </Frame>
+
+            <Label Text="Parola:"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,10,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Entry TextColor="#283D88"
+                       FontSize="16"
+                       Keyboard="Text"
+                       IsPassword="True"
+                       Margin="5"/> 
+            </Frame>
+            
+            <Label Text="Confirmă parola:"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,10,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Entry TextColor="#283D88"
+                       FontSize="16"
+                       Keyboard="Text"
+                       IsPassword="True"
+                       Margin="5"/> 
+            </Frame>
+            
+            <Label Text="Prenume:"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,10,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Entry TextColor="#283D88"
+                       FontSize="16"
+                       Keyboard="Text"
+                       Margin="5"/> 
+            </Frame>
+            
+            <Label Text="Nume de familie:"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,10,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Entry TextColor="#283D88"
+                       FontSize="16"
+                       Keyboard="Text"
+                       Margin="5"/> 
+            </Frame>
+
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Sex:"
+                           TextColor="White"
+                           FontSize="14"
+                           HorizontalTextAlignment="Start"
+                           Padding="0,10,0,0"/>
+
+                    <Frame BorderColor="Transparent"
+                           HeightRequest="30"
+                           Padding="0">
+
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Picker Grid.Column="0"
+                                    TextColor="#283D88"
+                                    FontSize="16">
+
+                                <Picker.Items>
+                                    <x:String>M</x:String>
+                                    <x:String>F</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Image Grid.Column="1"
+                                   Source="picker_icon.svg"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Vârsta:"
+                           TextColor="White"
+                           FontSize="14"
+                           HorizontalTextAlignment="Start"
+                           Padding="0,10,0,0"/>
+
+                    <Frame BorderColor="Transparent"
+                           HeightRequest="30"
+                           Padding="0">
+
+                        <Entry TextColor="#283D88"
+                               FontSize="16"
+                               Keyboard="Numeric"
+                               Margin="5"/>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+            
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Înălțime:"
+                           TextColor="White"
+                           FontSize="14"
+                           HorizontalTextAlignment="Start"
+                           Padding="0,10,0,0"/>
+
+                    <Frame BorderColor="Transparent"
+                           HeightRequest="30"
+                           Padding="0">
+
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Entry TextColor="#283D88"
+                                   FontSize="16"
+                                   Keyboard="Numeric"/>
+
+                            <Label Grid.Column="1"
+                                   Text="cm"
+                                   FontSize="12"
+                                   TextColor="#283D88"/>
+                        </Grid>
+
+                    </Frame>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Greutate:"
+                           TextColor="White"
+                           FontSize="14"
+                           HorizontalTextAlignment="Start"
+                           Padding="0,10,0,0"/>
+
+                    <Frame BorderColor="Transparent"
+                           HeightRequest="30"
+                           Padding="0">
+
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Entry TextColor="#283D88"
+                                   FontSize="16"
+                                   Keyboard="Numeric"/>
+
+                            <Label Grid.Column="1"
+                                   Text="kg"
+                                   FontSize="12"
+                                   TextColor="#283D88"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Label Text="Nivel activitate fizică"
+                   TextColor="White"
+                   FontSize="14"
+                   HorizontalTextAlignment="Start"
+                   Padding="0,10,0,0"/>
+
+            <Frame BorderColor="Transparent"
+                   HeightRequest="30"
+                   Padding="0">
+
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Picker Grid.Column="0"
+                            TextColor="#283D88"
+                            FontSize="16">
+
+                        <Picker.Items>
+                            <x:String>Sedentar</x:String>
+                            <x:String>Mediu</x:String>
+                            <x:String>Moderat</x:String>
+                            <x:String>Intens</x:String>
+                            <x:String>Foarte intens</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Image Grid.Column="1"
+                           Source="picker_icon.svg"/>
+                </Grid>
+            </Frame>
+
+            <Button Text="Înregistrează-te"
+                    BackgroundColor="#E6AE41"
+                    HeightRequest="40"
+                    Padding="0"
+                    Clicked="BtnInregistrare_Clicked"
+                    Margin="0,40,0,0"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Deja ai cont?"
+                       TextColor="White"
+                       FontSize="9.5"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+
+                <Button Grid.Column="1"
+                        Text="Autentifică-te"
+                        TextColor="#E6AE41"
+                        BackgroundColor="Transparent"
+                        FontSize="9.5"
+                        HeightRequest="30"
+                        Clicked="BtnConectare_Clicked"
+                        Padding="8,0"/>
+            </Grid>
+        </StackLayout>
+    </Frame>
 </ContentPage>
