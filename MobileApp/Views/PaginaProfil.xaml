@@ -2,12 +2,168 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaProfil"
-             Title="PaginaProfil">
+             Title="PaginaProfil"
+             BackgroundColor="#3E57B2">
     
     <VerticalStackLayout>
-        <Label 
-            Text="Pagina profil"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <!--#region Bara-->
+        <Frame CornerRadius="0"
+               BorderColor="Transparent"
+               VerticalOptions="Start"
+               HeightRequest="100"
+               HasShadow="True"
+               Padding="0">
+
+            <HorizontalStackLayout>
+                <ImageButton Source="inapoi_icoana.svg"
+                             WidthRequest="48"
+                             Clicked="BtnIntoarcere_Clicked"
+                             Margin="20"/>
+
+                <Image Source="logo_v2.svg"
+                       HeightRequest="70"
+                       Margin="25,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <!--#endregion-->
+
+        <Frame BackgroundColor="#283D88"
+               BorderColor="Transparent"
+               Margin="50, 80"
+               HasShadow="True"
+               Padding="20,15">
+
+            <VerticalStackLayout>
+                <Label Text="Username"
+                       TextColor="White"
+                       FontSize="22"
+                       HorizontalTextAlignment="Center"
+                       Padding="0"/>
+
+                <Grid Margin="0,10"
+                      RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout Grid.Row="0"
+                                         Grid.Column="0">
+
+                        <Label Text="Prenume:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="Mădălin-Florin"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="1"
+                                         Grid.Column="0">
+
+                        <Label Text="Nume de familie:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="Goian"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="2"
+                                         Grid.Column="0">
+
+                        <Label Text="Sex:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="Masculin"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="2"
+                                         Grid.Column="1">
+
+                        <Label Text="Vârstă:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="22"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="3"
+                                         Grid.Column="0">
+
+                        <Label Text="Înălțime:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="177 cm"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="3"
+                                         Grid.Column="1">
+
+                        <Label Text="Greutate:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="76 kg"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="4"
+                                         Grid.Column="0">
+
+                        <Label Text="Activitate fizică:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="Moderat"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="5"
+                                         Grid.Column="0">
+
+                        <Label Text="Necesar caloric:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Label Text="2100 kcal"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+
+                    <Button Grid.Row="6"
+                            Grid.Column="0"
+                            BackgroundColor="#E6AE41"
+                            Text="Editează profil"
+                            FontSize="12"
+                            Clicked="BtnEditareProfil_Clicked"
+                            Margin="0,10,5,5"
+                            Padding="0"/>
+                    
+                    <Button Grid.Row="6"
+                            Grid.Column="1"
+                            BackgroundColor="#E6AE41"
+                            Text="Vezi istoric"
+                            Clicked="BtnIstoric_Clicked"
+                            FontSize="12"
+                            Margin="5,10,0,5"
+                            Padding="0"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+
+#if ANDROID
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+#endif
 
 namespace MobileApp;
 

@@ -140,7 +140,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1">
-                    <Label Text="Vârsta:"
+                    <Label Text="Vârstă:"
                            TextColor="White"
                            FontSize="14"
                            HorizontalTextAlignment="Start"
