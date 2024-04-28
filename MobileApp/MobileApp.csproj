@@ -74,6 +74,9 @@
 	  <MauiXaml Update="Views\PaginaInregistrare.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PaginaIstoricDataCalendaristica.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PaginaPrincipala.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

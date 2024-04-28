@@ -6,10 +6,10 @@
              BackgroundColor="#3E57B2">
 
     <Frame BackgroundColor="#283D88"
-               BorderColor="Transparent"
-               Margin="60, 20"
-               HasShadow="True"
-               Padding="45,15">
+           BorderColor="Transparent"
+           Margin="60, 20"
+           HasShadow="True"
+           Padding="45,15">
 
         <StackLayout>
             <Label Text="Înregistrare"
@@ -134,7 +134,7 @@
                             </Picker>
 
                             <Image Grid.Column="1"
-                                   Source="picker_icon.svg"/>
+                                   Source="picker_icoana.svg"/>
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
@@ -254,7 +254,7 @@
                     </Picker>
 
                     <Image Grid.Column="1"
-                           Source="picker_icon.svg"/>
+                           Source="picker_icoana.svg"/>
                 </Grid>
             </Frame>
 

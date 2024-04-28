@@ -6,4 +6,9 @@ public partial class PaginaPrincipala : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void MaiMulteBtn_Clicked(object sender, EventArgs e)
+    {
+		Application.Current.MainPage = new PaginaIstoricDataCalendaristica();
+    }
 }
