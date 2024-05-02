@@ -721,16 +721,16 @@
                             <!--#endregion-->
 
                             <ImageButton Source="mai_multe_icoana.svg"
-                                     HeightRequest="30"
-                                     Clicked="BtnMaiMulte_Clicked"
-                                     HorizontalOptions="End"/>
+                                         HeightRequest="30"
+                                         Clicked="BtnMaiMulte_Clicked"
+                                         HorizontalOptions="End"/>
 
                             <Label Text="Nu există înregistrări pe astăzi"
-                               TextColor="White"
-                               HorizontalTextAlignment="Center"
-                               Margin="15,20,15,10"
-                               IsEnabled="False"
-                               IsVisible="False"/>
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="15,20,15,10"
+                                   IsEnabled="False"
+                                   IsVisible="False"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->
