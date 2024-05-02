@@ -30,6 +30,7 @@
 
                 <Entry TextColor="#283D88"
                        FontSize="16"
+                       IsSpellCheckEnabled="False"
                        Keyboard="Text"
                        Margin="5"/>
             </Frame>
@@ -46,6 +47,7 @@
 
                 <Entry TextColor="#283D88"
                        FontSize="16"
+                       IsSpellCheckEnabled="False"
                        Keyboard="Text"
                        IsPassword="True"
                        Margin="5"/> 
@@ -63,6 +65,7 @@
 
                 <Entry TextColor="#283D88"
                        FontSize="16"
+                       IsSpellCheckEnabled="False"
                        Keyboard="Text"
                        IsPassword="True"
                        Margin="5"/> 
@@ -80,6 +83,7 @@
 
                 <Entry TextColor="#283D88"
                        FontSize="16"
+                       IsSpellCheckEnabled="False"
                        Keyboard="Text"
                        Margin="5"/> 
             </Frame>
@@ -96,6 +100,7 @@
 
                 <Entry TextColor="#283D88"
                        FontSize="16"
+                       IsSpellCheckEnabled="False"
                        Keyboard="Text"
                        Margin="5"/> 
             </Frame>

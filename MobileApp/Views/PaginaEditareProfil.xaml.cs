@@ -6,4 +6,14 @@ public partial class PaginaEditareProfil : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BtnIntoarcere_Clicked(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new PaginaProfil();
+    }
+
+    private void BtnSalvare_Clicked(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new PaginaProfil();
+    }
 }

@@ -2,11 +2,216 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaEditareProfil"
-             Title="PaginaEditareProfil">
+             Title="PaginaEditareProfil"
+             BackgroundColor="#3E57B2">
+    
     <VerticalStackLayout>
-        <Label 
-            Text="Editare profil"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <!--#region Bara-->
+        <Frame CornerRadius="0"
+               BorderColor="Transparent"
+               VerticalOptions="Start"
+               HeightRequest="100"
+               HasShadow="True"
+               Padding="0">
+
+            <HorizontalStackLayout>
+                <ImageButton Source="inapoi_icoana.svg"
+                             WidthRequest="48"
+                             Clicked="BtnIntoarcere_Clicked"
+                             Margin="20"/>
+
+                <Image Source="logo_v2.svg"
+                       HeightRequest="70"
+                       Margin="25,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <!--#endregion-->
+
+        <Frame BackgroundColor="#283D88"
+               BorderColor="Transparent"
+               Margin="50, 80"
+               HasShadow="True"
+               Padding="20,15">
+
+            <VerticalStackLayout>
+                <Label Text="Username"
+                       TextColor="White"
+                       FontSize="22"
+                       HorizontalTextAlignment="Center"
+                       Padding="0"/>
+
+                <Grid Margin="0,10"
+                      RowSpacing="8">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <VerticalStackLayout Grid.Row="0"
+                                         Grid.Column="0">
+
+                        <Label Text="Prenume:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               Padding="0">
+
+                            <Entry TextColor="#283D88"
+                                   Text="Madalin-Florin"
+                                   IsSpellCheckEnabled="False"
+                                   FontSize="12"
+                                   Keyboard="Text"
+                                   Margin="5"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="1"
+                                         Grid.Column="0">
+
+                        <Label Text="Nume de familie:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               Padding="0">
+
+                            <Entry TextColor="#283D88"
+                                   Text="Goian"
+                                   IsSpellCheckEnabled="False"
+                                   FontSize="12"
+                                   Keyboard="Text"
+                                   Margin="5"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="2"
+                                         Grid.Column="0">
+
+                        <Label Text="Vârsta:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               WidthRequest="50"
+                               HorizontalOptions="Start"
+                               Padding="0">
+
+                            <Entry TextColor="#283D88"
+                                   Text="22"
+                                   IsSpellCheckEnabled="False"
+                                   FontSize="12"
+                                   Keyboard="Text"
+                                   Margin="5"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="3"
+                                         Grid.Column="0">
+
+                        <Label Text="Înălțime:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               WidthRequest="50"
+                               HorizontalOptions="Start"
+                               Padding="0">
+
+                            <Entry TextColor="#283D88"
+                                   Text="177"
+                                   IsSpellCheckEnabled="False"
+                                   FontSize="12"
+                                   Keyboard="Text"
+                                   Margin="5"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="3"
+                                         Grid.Column="1">
+
+                        <Label Text="Greutate:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               WidthRequest="50"
+                               HorizontalOptions="Start"
+                               Padding="0">
+
+                            <Entry TextColor="#283D88"
+                                   Text="76"
+                                   IsSpellCheckEnabled="False"
+                                   FontSize="12"
+                                   Keyboard="Text"
+                                   Margin="5"/>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="4"
+                                         Grid.Column="0">
+
+                        <Label Text="Nivel activitate fizică:"
+                               TextColor="White"
+                               FontSize="10"/>
+
+                        <Frame BorderColor="Transparent"
+                               HeightRequest="25"
+                               Padding="0">
+
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Picker Grid.Column="0"
+                                        TextColor="#283D88"
+                                        FontSize="12"
+                                        SelectedItem="Moderat">
+
+                                    <Picker.Items>
+                                        <x:String>Sedentar</x:String>
+                                        <x:String>Mediu</x:String>
+                                        <x:String>Moderat</x:String>
+                                        <x:String>Intens</x:String>
+                                        <x:String>Foarte intens</x:String>
+                                    </Picker.Items>
+                                </Picker>
+
+                                <Image Grid.Column="1"
+                                       Source="picker_icoana.svg"/>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <Button Grid.Row="5"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="#E6AE41"
+                            Text="Salvează"
+                            FontSize="12"
+                            WidthRequest="100"
+                            Clicked="BtnSalvare_Clicked"
+                            Margin="0,30,5,5"
+                            Padding="0"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

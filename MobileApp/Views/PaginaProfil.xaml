@@ -42,6 +42,7 @@
 
                 <Grid Margin="0,10"
                       RowSpacing="8">
+                    
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
