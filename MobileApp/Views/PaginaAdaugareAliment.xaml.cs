@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Alerts;
+
 namespace MobileApp.Views;
 
 public partial class PaginaAdaugareAliment : ContentPage
@@ -39,5 +41,23 @@ public partial class PaginaAdaugareAliment : ContentPage
     private void BtnScanareCodBare_Clicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new PaginaScanareCodBare();
+    }
+
+    private void BtnIesireAlimentSelectat_Clicked(object sender, EventArgs e)
+    {
+        gridAlimentSelectat.IsEnabled = false;
+        gridAlimentSelectat.IsVisible = false;
+    }
+
+    private void BtnSelectareAliment_Clicked(object sender, EventArgs e)
+    {
+        gridAlimentSelectat.IsEnabled = true;
+        gridAlimentSelectat.IsVisible = true;
+    }
+
+    private async void BtnConfirmareAdaugareAliment_Clicked(object sender, EventArgs e)
+    {
+        await Toast.Make("Alimentul a fost adãugat", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+        Application.Current.MainPage = new PaginaPrincipala();
     }
 }
