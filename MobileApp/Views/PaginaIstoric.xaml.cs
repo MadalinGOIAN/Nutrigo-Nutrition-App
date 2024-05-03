@@ -14,6 +14,6 @@ public partial class PaginaIstoric : ContentPage
 
     private void BtnMaiMulte_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaIstoricDataCalendaristica();
+        Application.Current.MainPage = new PaginaIstoricDataCalendaristica(nameof(PaginaIstoric));
     }
 }

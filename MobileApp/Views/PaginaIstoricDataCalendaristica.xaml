@@ -2,12 +2,487 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaIstoricDataCalendaristica"
-             Title="PaginaIstoricDataCalendaristica">
+             Title="PaginaIstoricDataCalendaristica"
+             BackgroundColor="#3E57B2">
     
     <VerticalStackLayout>
-        <Label 
-            Text="Pagina Istoric in data calendaristica"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <!--#region Bara-->
+        <Frame CornerRadius="0"
+               BorderColor="Transparent"
+               VerticalOptions="Start"
+               HeightRequest="100"
+               HasShadow="True"
+               Padding="0">
+
+            <HorizontalStackLayout>
+                <ImageButton Source="inapoi_icoana.svg"
+                             WidthRequest="48"
+                             Clicked="BtnIntoarcere_Clicked"
+                             Margin="20"/>
+
+                <Image Source="logo_v2.svg"
+                       HeightRequest="70"
+                       Margin="25,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <!--#endregion-->
+
+        <Frame BackgroundColor="#283D88"
+               BorderColor="Transparent"
+               Margin="30, 80"
+               HasShadow="True"
+               Padding="20,15">
+
+            <VerticalStackLayout>
+                <Label Text="Dată aleasă"
+                       TextColor="White"
+                       FontSize="18"
+                       HorizontalTextAlignment="Center"
+                       Padding="0"/>
+
+                <ScrollView HeightRequest="400"
+                            VerticalScrollBarVisibility="Never"
+                            Margin="0,20,0,0">
+                    
+                    <!--#region Inregistrari-->
+                    <Grid Margin="15,10"
+                          RowSpacing="8">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="0"
+                                   Source="tacamuri_icoana.svg"
+                                   HeightRequest="20"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="Avocado"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"                  
+                                   Text="130 g"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="Calorii:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="208 kcal"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="Grăsimi:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="20 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="Glucide:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Text="12 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="Proteine:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Text="3 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="0"
+                                   Source="tacamuri_icoana.svg"
+                                   HeightRequest="20"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="Avocado"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Text="130 g"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="Calorii:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="208 kcal"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="Grăsimi:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="20 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="Glucide:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Text="12 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="Proteine:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Text="3 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="0"
+                                   Source="tacamuri_icoana.svg"
+                                   HeightRequest="20"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="Avocado"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"
+                                   Text="130 g"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="Calorii:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="208 kcal"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="Grăsimi:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="20 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="Glucide:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Text="12 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="Proteine:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Text="3 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0"
+                                   Grid.Column="0"
+                                   Source="tacamuri_icoana.svg"
+                                   HeightRequest="20"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="Avocado"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="2"                  
+                                   Text="130 g"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="Calorii:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="2"
+                                   Text="208 kcal"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="Grăsimi:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="2"
+                                   Grid.Column="2"
+                                   Text="20 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="Glucide:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="3"
+                                   Grid.Column="2"
+                                   Text="12 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="1"
+                                   Text="Proteine:"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0"/>
+
+                            <Label Grid.Row="4"
+                                   Grid.Column="2"
+                                   Text="3 g"
+                                   TextColor="White"
+                                   FontSize="10"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5,0"/>
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+
+                </ScrollView>
+            </VerticalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

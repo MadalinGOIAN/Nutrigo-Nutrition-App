@@ -9,7 +9,7 @@ public partial class PaginaPrincipala : ContentPage
 
     private void BtnMaiMulte_Clicked(object sender, EventArgs e)
     {
-		Application.Current.MainPage = new PaginaIstoricDataCalendaristica();
+		Application.Current.MainPage = new PaginaIstoricDataCalendaristica(nameof(PaginaPrincipala));
     }
 
     private void BtnMeniu_Clicked(object sender, EventArgs e)
