@@ -22,8 +22,8 @@
                                  Margin="20"/>
 
                     <Image Source="logo_v2.svg"
-                       HeightRequest="70"
-                       Margin="25,0"/>
+                           HeightRequest="70"
+                           Margin="25,0"/>
                 </HorizontalStackLayout>
             </Frame>
             <!--#endregion-->
@@ -35,19 +35,19 @@
                 <VerticalStackLayout>
                     <!--#region Calorii-->
                     <Frame BackgroundColor="#283D88"
-                       BorderColor="Transparent"
-                       HasShadow="True"
-                       Padding="10">
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           Padding="10">
 
                         <VerticalStackLayout>
                             <Label Text="Calorii"
-                               TextColor="White"
-                               FontSize="18"
-                               HorizontalTextAlignment="Center"
-                               Padding="0"/>
+                                   TextColor="White"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="0"/>
 
                             <Grid Margin="15,10"
-                              RowSpacing="8">
+                                RowSpacing="8">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -61,59 +61,59 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Row="0"
-                                   Grid.Column="0"
-                                   Source="obiectiv_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="obiectiv_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Obiectiv zilnic:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Obiectiv zilnic:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="2100 kcal"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="2100 kcal"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
 
                                 <Image Grid.Row="1"
-                                   Grid.Column="0"
-                                   Source="tacamuri_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="tacamuri_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Consumat:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Consumat:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="2000 kcal"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="2000 kcal"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
                             </Grid>
 
                             <ProgressBar ProgressColor="#78EE41"
-                                     Progress="0.75"
-                                     Margin="15,0"/>
+                                         Progress="0.75"
+                                         Margin="15,0"/>
 
                             <Label Text="100 kcal rămase"
-                               TextColor="White"
-                               FontSize="12"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"/>
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->
