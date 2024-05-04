@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:camera="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              x:Class="MobileApp.Views.PaginaScanareCodBare"
-             Title="PaginaScanareCodBare">
+             Title="PaginaScanareCodBare"
+             BackgroundColor="#3E57B2">
+    
     <VerticalStackLayout>
-        <Label 
-            Text="Scanare cod bare"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <!--#region Bara-->
+        <Frame CornerRadius="0"
+               BorderColor="Transparent"
+               VerticalOptions="Start"
+               HeightRequest="100"
+               HasShadow="True"
+               Padding="0">
+
+            <HorizontalStackLayout>
+                <ImageButton Source="inapoi_icoana.svg"
+                             WidthRequest="48"
+                             Clicked="BtnIntoarcere_Clicked"
+                             Margin="20"/>
+
+                <Image Source="logo_v2.svg"
+                       HeightRequest="70"
+                       Margin="25,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <!--#endregion-->
+
+        <camera:CameraView x:Name="cameraView"
+                           WidthRequest="300"
+                           HeightRequest="300"
+                           BarCodeDetectionEnabled="True"
+                           CamerasLoaded="cameraView_CamerasLoaded"
+                           BarcodeDetected="cameraView_BarcodeDetected"
+                           Margin="0,100"/>
     </VerticalStackLayout>
 </ContentPage>

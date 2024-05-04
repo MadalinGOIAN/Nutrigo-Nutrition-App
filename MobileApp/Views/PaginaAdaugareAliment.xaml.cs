@@ -4,9 +4,15 @@ namespace MobileApp.Views;
 
 public partial class PaginaAdaugareAliment : ContentPage
 {
-	public PaginaAdaugareAliment()
+	public PaginaAdaugareAliment(bool sectiuneAlimentSelectatDeschisa = false)
 	{
 		InitializeComponent();
+
+        if (sectiuneAlimentSelectatDeschisa)
+        {
+            gridAlimentSelectat.IsEnabled = true;
+            gridAlimentSelectat.IsVisible = true;
+        }
 	}
 
     private void BtnIntoarcere_Clicked(object sender, EventArgs e)

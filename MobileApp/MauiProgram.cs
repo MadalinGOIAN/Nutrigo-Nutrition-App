@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using Camera.MAUI;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
 #if ANDROID
@@ -15,6 +16,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseMauiCameraView()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("Inter-Black.ttf", "InterBlack");
