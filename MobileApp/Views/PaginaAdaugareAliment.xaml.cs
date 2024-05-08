@@ -63,7 +63,7 @@ public partial class PaginaAdaugareAliment : ContentPage
 
     private async void BtnConfirmareAdaugareAliment_Clicked(object sender, EventArgs e)
     {
-        await Toast.Make("Alimentul a fost adãugat", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
         Application.Current.MainPage = new PaginaPrincipala();
+        await Toast.Make("Alimentul a fost adãugat", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
     }
 }

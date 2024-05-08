@@ -29,6 +29,7 @@ public partial class PaginaScanareCodBare : ContentPage
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
+                await Task.Delay(500);
                 await cameraView.StopCameraAsync();
                 await cameraView.StartCameraAsync();
             });
