@@ -46,7 +46,7 @@ public partial class PaginaAdaugareAliment : ContentPage
 
     private void BtnScanareCodBare_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaScanareCodBare();
+        Application.Current.MainPage = new PaginaScanareCodBare(nameof(PaginaAdaugareAliment));
     }
 
     private void BtnIesireAlimentSelectat_Clicked(object sender, EventArgs e)

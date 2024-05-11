@@ -29,7 +29,7 @@
 
         <Frame BackgroundColor="#283D88"
                BorderColor="Transparent"
-               Margin="60,80,60,0"
+               Margin="60,70,60,10"
                HasShadow="True"
                Padding="45,15">
 
@@ -41,49 +41,163 @@
 
                 <Label Text="Denumire produs:"
                        TextColor="White"
-                       FontSize="14"
                        HorizontalTextAlignment="Start"
                        Padding="0,25,0,0"/>
 
                 <Frame BorderColor="Transparent"
-                       HeightRequest="30"
+                       HeightRequest="28"
                        Padding="0"
                        Margin="0,0,0,10">
 
                     <Entry TextColor="#283D88"
-                           FontSize="16"
+                           FontSize="14"
                            IsSpellCheckEnabled="False"
                            Keyboard="Text"
                            Margin="5"/>
                 </Frame>
-            </VerticalStackLayout>
-        </Frame>
 
-        <Frame BackgroundColor="#283D88"
-               BorderColor="Transparent"
-               Margin="60,10"
-               HasShadow="True"
-               Padding="30,15">
-
-            <VerticalStackLayout>
-                <Image Source="foto_icoana.svg"
-                       Margin="0,10"/>
-
-                <Label Text="Mai departe fotografiază tabelul nutrițional"
+                <Label Text="Calorii:"
                        TextColor="White"
-                       FontSize="14"
-                       HorizontalTextAlignment="Center"
-                       Margin="0,0,0,5"/>
+                       HorizontalTextAlignment="Start"/>
+
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+                           BorderColor="Transparent"
+                           HeightRequest="28"
+                           Padding="0">
+
+                        <Entry TextColor="#283D88"
+                               FontSize="14"
+                               IsSpellCheckEnabled="False"
+                               Keyboard="Numeric"
+                               Margin="5"/>
+                    </Frame>
+
+                    <Label Grid.Column="1"
+                           Text="kcal"
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0,0,0"/>
+                </Grid>
+                
+                <Label Text="Grăsimi:"
+                       TextColor="White"
+                       HorizontalTextAlignment="Start"/>
+
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+                           BorderColor="Transparent"
+                           HeightRequest="28"
+                           Padding="0">
+
+                        <Entry TextColor="#283D88"
+                               FontSize="14"
+                               IsSpellCheckEnabled="False"
+                               Keyboard="Numeric"
+                               Margin="5"/>
+                    </Frame>
+
+                    <Label Grid.Column="1"
+                           Text="g"
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0,0,0"/>
+                </Grid>
+                
+                <Label Text="Glucide:"
+                       TextColor="White"
+                       HorizontalTextAlignment="Start"/>
+
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+                           BorderColor="Transparent"
+                           HeightRequest="28"
+                           Padding="0">
+
+                        <Entry TextColor="#283D88"
+                               FontSize="14"
+                               IsSpellCheckEnabled="False"
+                               Keyboard="Numeric"
+                               Margin="5"/>
+                    </Frame>
+
+                    <Label Grid.Column="1"
+                           Text="g"
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0,0,0"/>
+                </Grid>
+                
+                <Label Text="Proteine:"
+                       TextColor="White"
+                       HorizontalTextAlignment="Start"/>
+
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Column="0"
+                           BorderColor="Transparent"
+                           HeightRequest="28"
+                           Padding="0">
+
+                        <Entry TextColor="#283D88"
+                               FontSize="14"
+                               IsSpellCheckEnabled="False"
+                               Keyboard="Numeric"
+                               Margin="5"/>
+                    </Frame>
+
+                    <Label Grid.Column="1"
+                           Text="g"
+                           TextColor="White"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0,0,0"/>
+                </Grid>
             </VerticalStackLayout>
         </Frame>
 
         <Grid Margin="60,0"
-              HorizontalOptions="End">
+              ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <Button Text="Pasul următor"
-                    Padding="0"
-                    WidthRequest="170"
-                    Clicked="BtnPasUrmator_Clicked"
+            <Button Grid.Column="0"
+                    Text="Scanează codul de bare"
+                    LineBreakMode="WordWrap"
+                    FontSize="12"
+                    Padding="5"
+                    Clicked="BtnScanareCodBare_Clicked"
+                    BackgroundColor="#E6AE41"/>
+            
+            <Button Grid.Column="1"
+                    Text="Sari peste"
+                    FontSize="12"
+                    Padding="5"
+                    Clicked="BtnSariPeste_Clicked"
                     BackgroundColor="#E6AE41"/>
         </Grid>
     </VerticalStackLayout>
