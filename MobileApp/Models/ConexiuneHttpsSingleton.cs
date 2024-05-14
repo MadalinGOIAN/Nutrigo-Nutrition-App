@@ -24,9 +24,10 @@ public sealed class ConexiuneHttpsSingleton
         EsteTokenSalvat = false;
     }
 
-    public async Task TrimiteCerereHttpPostAsincron<Cheie, Valoare>(
+    public async Task TrimiteCerereHttpPostAsincron<Schema>(
         string uriCerere,
-        Dictionary<Cheie, Valoare> valori)
+        Schema valori,
+        bool esteConectareUtilizator)
     {
         if (EsteTokenSalvat)
             AdaugaAntetAutorizare();
@@ -35,7 +36,7 @@ public sealed class ConexiuneHttpsSingleton
         var continut = new StringContent(json, Encoding.UTF8, "application/json");
         Raspuns = await Client.PostAsync(uriCerere, continut);
 
-        if (!EsteTokenSalvat && Raspuns.IsSuccessStatusCode)
+        if (!EsteTokenSalvat && Raspuns.IsSuccessStatusCode && esteConectareUtilizator)
         {
             StocheazaToken();
             EsteTokenSalvat = true;

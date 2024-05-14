@@ -28,7 +28,10 @@
                    HeightRequest="30"
                    Padding="0">
 
-                <Entry TextColor="#283D88"
+                <Entry x:Name="entryNumeUtilizator"
+                       Text="{Binding NumeUtilizator}"
+                       Completed="entryNumeUtilizator_Completed"
+                       TextColor="#283D88"
                        FontSize="16"
                        IsSpellCheckEnabled="False"
                        Keyboard="Text"
@@ -45,7 +48,10 @@
                    HeightRequest="30"
                    Padding="0">
 
-                <Entry TextColor="#283D88"
+                <Entry x:Name="entryParola"
+                       Text="{Binding Parola}"
+                       Completed="entryParola_Completed"
+                       TextColor="#283D88"
                        FontSize="16"
                        IsSpellCheckEnabled="False"
                        Keyboard="Text"
@@ -63,7 +69,9 @@
                    HeightRequest="30"
                    Padding="0">
 
-                <Entry TextColor="#283D88"
+                <Entry x:Name="entryConfirmareParola"
+                       Completed="entryConfirmareParola_Completed"
+                       TextColor="#283D88"
                        FontSize="16"
                        IsSpellCheckEnabled="False"
                        Keyboard="Text"
@@ -81,7 +89,10 @@
                    HeightRequest="30"
                    Padding="0">
 
-                <Entry TextColor="#283D88"
+                <Entry x:Name="entryPrenume"
+                       Text="{Binding Prenume}"
+                       Completed="entryPrenume_Completed"
+                       TextColor="#283D88"
                        FontSize="16"
                        IsSpellCheckEnabled="False"
                        Keyboard="Text"
@@ -98,7 +109,10 @@
                    HeightRequest="30"
                    Padding="0">
 
-                <Entry TextColor="#283D88"
+                <Entry x:Name="entryNumeFamilie"
+                       Text="{Binding NumeFamilie}"
+                       Completed="entryNumeFamilie_Completed"
+                       TextColor="#283D88"
                        FontSize="16"
                        IsSpellCheckEnabled="False"
                        Keyboard="Text"
@@ -128,7 +142,10 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Picker Grid.Column="0"
+                            <Picker x:Name="pickerSex"
+                                    SelectedItem="{Binding Sex}"
+                                    SelectedIndexChanged="pickerSex_SelectedIndexChanged"
+                                    Grid.Column="0"
                                     TextColor="#283D88"
                                     FontSize="16">
 
@@ -155,7 +172,11 @@
                            HeightRequest="30"
                            Padding="0">
 
-                        <Entry TextColor="#283D88"
+                        <Entry x:Name="entryVarsta"
+                               Text="{Binding Varsta}"
+                               Loaded="entryVarsta_Loaded"
+                               Completed="entryVarsta_Completed"
+                               TextColor="#283D88"
                                FontSize="16"
                                Keyboard="Numeric"
                                Margin="5"/>
@@ -186,7 +207,11 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Entry TextColor="#283D88"
+                            <Entry x:Name="entryInaltime"
+                                   Text="{Binding Inaltime}"
+                                   Loaded="entryInaltime_Loaded"
+                                   Completed="entryInaltime_Completed"
+                                   TextColor="#283D88"
                                    FontSize="16"
                                    Keyboard="Numeric"/>
 
@@ -216,7 +241,11 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Entry TextColor="#283D88"
+                            <Entry x:Name="entryGreutate"
+                                   Text="{Binding Greutate}"
+                                   Loaded="entryGreutate_Loaded"
+                                   Completed="entryGreutate_Completed"
+                                   TextColor="#283D88"
                                    FontSize="16"
                                    Keyboard="Numeric"/>
 
@@ -245,7 +274,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Picker Grid.Column="0"
+                    <Picker x:Name="pickerNivelActivitateFizica"
+                            SelectedItem="{Binding NivelActivitateFizica}"
+                            Grid.Column="0"
                             TextColor="#283D88"
                             FontSize="16">
 

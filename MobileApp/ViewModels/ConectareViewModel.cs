@@ -21,10 +21,16 @@ public class ConectareViewModel : INotifyPropertyChanged
             { "parola", Parola }
         };
 
-        await ConexiuneHttps.TrimiteCerereHttpPostAsincron("api/utilizatori/conectare", valoriConectare);
+        await ConexiuneHttps.TrimiteCerereHttpPostAsincron(
+            uriCerere: "api/utilizatori/conectare",
+            valori: valoriConectare,
+            esteConectareUtilizator: true);
 
         if (ConexiuneHttps.Raspuns.IsSuccessStatusCode)
             Application.Current.MainPage = new PaginaPrincipala();
+        else if (ConexiuneHttps.Raspuns.Content.ReadAsStringAsync().Result
+                .Equals("\"Utilizatorul este deja conectat\""))
+            AfiseazaMesajUtilizatorDejaConectat();
         else
             AfiseazaMesajConectareInvalida();
     }
@@ -32,6 +38,7 @@ public class ConectareViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaConectare { get; private set; }
     public Action AfiseazaMesajConectareInvalida { get; set; }
+    public Action AfiseazaMesajUtilizatorDejaConectat { get; set; }
 
     private ConexiuneHttpsSingleton ConexiuneHttps { get; init; }
     public string NumeUtilizator
