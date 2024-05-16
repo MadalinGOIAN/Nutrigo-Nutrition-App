@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaPrincipala"
              Title="PaginaPrincipala"
-             BackgroundColor="#3E57B2">
+             BackgroundColor="#3E57B2"
+             Loaded="ContentPage_Loaded">
 
     <Grid>
         <!--#region Meniu inchis-->
@@ -76,7 +77,8 @@
                                 <Label Grid.Row="0"
                                        Grid.Column="2"
                                        TextColor="White"
-                                       Text="2100 kcal"
+                                       Text="{Binding Macronutrienti.Calorii,
+                                              StringFormat='{0:D} kcal'}"
                                        FontSize="12"
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"
@@ -98,18 +100,21 @@
                                 <Label Grid.Row="1"
                                        Grid.Column="2"
                                        TextColor="White"
-                                       Text="2000 kcal"
+                                       Text="{Binding SumarZi.CaloriiTotale,
+                                              StringFormat='{0:G} kcal'}"
                                        FontSize="12"
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"
                                        Padding="5,0"/>
                             </Grid>
 
-                            <ProgressBar ProgressColor="#78EE41"
-                                         Progress="0.75"
+                            <ProgressBar x:Name="progressBarCalorii"
+                                         ProgressColor="#78EE41"
+                                         Progress="{Binding Progres.Calorii}"
+                                         PropertyChanged="progressBarCalorii_PropertyChanged"
                                          Margin="15,0"/>
 
-                            <Label Text="100 kcal rămase"
+                            <Label x:Name="labelCaloriiRamase"
                                    TextColor="White"
                                    FontSize="12"
                                    HorizontalTextAlignment="Center"
@@ -120,20 +125,20 @@
 
                     <!--#region Grasimi-->
                     <Frame BackgroundColor="#283D88"
-                       BorderColor="Transparent"
-                       HasShadow="True"
-                       Padding="10"
-                       Margin="0,25,0,0">
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           Padding="10"
+                           Margin="0,25,0,0">
 
                         <VerticalStackLayout>
                             <Label Text="Grăsimi"
-                               TextColor="White"
-                               FontSize="18"
-                               HorizontalTextAlignment="Center"
-                               Padding="0"/>
+                                   TextColor="White"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="0"/>
 
                             <Grid Margin="15,10"
-                              RowSpacing="8">
+                                RowSpacing="8">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -147,79 +152,83 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Row="0"
-                                   Grid.Column="0"
-                                   Source="obiectiv_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="obiectiv_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Obiectiv zilnic:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Obiectiv zilnic:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="65 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding Macronutrienti.Grasimi,
+                                              StringFormat='{0:D} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
 
                                 <Image Grid.Row="1"
-                                   Grid.Column="0"
-                                   Source="tacamuri_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="tacamuri_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Consumat:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Consumat:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="67 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding SumarZi.GrasimiTotale,
+                                              StringFormat='{0:G} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
                             </Grid>
 
-                            <ProgressBar ProgressColor="#DB2B2B"
-                                     Progress="1"
-                                     Margin="15,0"/>
+                            <ProgressBar x:Name="progressBarGrasimi"
+                                         ProgressColor="#78EE41"
+                                         Progress="{Binding Progres.Grasimi}"
+                                         PropertyChanged="progressBarGrasimi_PropertyChanged"
+                                         Margin="15,0"/>
 
-                            <Label Text="2 g peste obiectiv"
-                               TextColor="White"
-                               FontSize="12"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"/>
+                            <Label x:Name="labelGrasimiRamase"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->
 
                     <!--#region Glucide-->
                     <Frame BackgroundColor="#283D88"
-                       BorderColor="Transparent"
-                       HasShadow="True"
-                       Padding="10"
-                       Margin="0,25,0,0">
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           Padding="10"
+                           Margin="0,25,0,0">
 
                         <VerticalStackLayout>
                             <Label Text="Glucide"
-                               TextColor="White"
-                               FontSize="18"
-                               HorizontalTextAlignment="Center"
-                               Padding="0"/>
+                                   TextColor="White"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="0"/>
 
                             <Grid Margin="15,10"
-                              RowSpacing="8">
+                                RowSpacing="8">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -233,79 +242,83 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Row="0"
-                                   Grid.Column="0"
-                                   Source="obiectiv_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="obiectiv_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Obiectiv zilnic:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Obiectiv zilnic:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="65 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding Macronutrienti.Glucide,
+                                              StringFormat='{0:D} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
 
                                 <Image Grid.Row="1"
-                                   Grid.Column="0"
-                                   Source="tacamuri_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="tacamuri_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Consumat:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Consumat:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="60 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding SumarZi.GlucideTotale,
+                                              StringFormat='{0:G} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
                             </Grid>
 
-                            <ProgressBar ProgressColor="#78EE41"
-                                     Progress="0.95"
-                                     Margin="15,0"/>
+                            <ProgressBar x:Name="progressBarGlucide"
+                                         ProgressColor="#78EE41"
+                                         Progress="{Binding Progres.Glucide}"
+                                         PropertyChanged="progressBarGlucide_PropertyChanged"
+                                         Margin="15,0"/>
 
-                            <Label Text="5 g rămase"
-                               TextColor="White"
-                               FontSize="12"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"/>
+                            <Label x:Name="labelGlucideRamase"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->
 
                     <!--#region Proteine-->
                     <Frame BackgroundColor="#283D88"
-                       BorderColor="Transparent"
-                       HasShadow="True"
-                       Padding="10"
-                       Margin="0,25,0,0">
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           Padding="10"
+                           Margin="0,25,0,0">
 
                         <VerticalStackLayout>
                             <Label Text="Proteine"
-                               TextColor="White"
-                               FontSize="18"
-                               HorizontalTextAlignment="Center"
-                               Padding="0"/>
+                                   TextColor="White"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="0"/>
 
                             <Grid Margin="15,10"
-                              RowSpacing="8">
+                                RowSpacing="8">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -319,80 +332,87 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image Grid.Row="0"
-                                   Grid.Column="0"
-                                   Source="obiectiv_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="obiectiv_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Obiectiv zilnic:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Obiectiv zilnic:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="0"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="65 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding Macronutrienti.Proteine,
+                                              StringFormat='{0:D} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
 
                                 <Image Grid.Row="1"
-                                   Grid.Column="0"
-                                   Source="tacamuri_icoana.svg"
-                                   HeightRequest="25"/>
+                                       Grid.Column="0"
+                                       Source="tacamuri_icoana.svg"
+                                       HeightRequest="25"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   TextColor="White"
-                                   Text="Consumat:"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   Padding="10,0"/>
+                                       Grid.Column="1"
+                                       TextColor="White"
+                                       Text="Consumat:"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10,0"/>
 
                                 <Label Grid.Row="1"
-                                   Grid.Column="2"
-                                   TextColor="White"
-                                   Text="60 g"
-                                   FontSize="12"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5,0"/>
+                                       Grid.Column="2"
+                                       TextColor="White"
+                                       Text="{Binding SumarZi.ProteineTotale,
+                                              StringFormat='{0:G} g'}"
+                                       FontSize="12"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="5,0"/>
                             </Grid>
 
-                            <ProgressBar ProgressColor="#78EE41"
-                                     Progress="0.95"
-                                     Margin="15,0"/>
+                            <ProgressBar x:Name="progressBarProteine"
+                                         ProgressColor="#78EE41"
+                                         Progress="{Binding Progres.Proteine}"
+                                         PropertyChanged="progressBarProteine_PropertyChanged"
+                                         Margin="15,0"/>
 
-                            <Label Text="5 g rămase"
-                               TextColor="White"
-                               FontSize="12"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"/>
+                            <Label x:Name="labelProteineRamase"
+                                   TextColor="White"
+                                   FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->
 
                     <!--#region Alimente consumate-->
                     <Frame BackgroundColor="#283D88"
-                       BorderColor="Transparent"
-                       HasShadow="True"
-                       Padding="10"
-                       Margin="0,25,0,0">
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           Loaded="FrameAlimenteConsumate_Loaded"
+                           Padding="10"
+                           Margin="0,25,0,0">
 
                         <VerticalStackLayout>
                             <Label Text="Alimente consumate"
-                           TextColor="White"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center"
-                           Padding="0"/>
+                                   TextColor="White"
+                                   FontSize="18"
+                                   HorizontalTextAlignment="Center"
+                                   Padding="0"/>
 
                             <!--#region Inregistrari-->
-                            <Grid Margin="15,10"
-                              RowSpacing="8">
+                            <Grid x:Name="gridInregistrari"
+                                  IsVisible="{Binding ExistaIstoricZiCurenta}"
+                                  Margin="15,10"
+                                  RowSpacing="8">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -400,7 +420,9 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0">
+                                <Grid Grid.Row="0"
+                                      IsVisible="{Binding ExistaOInregistrare}">
+
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
@@ -416,97 +438,104 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Grid.Row="0"
-                                       Grid.Column="0"
-                                       Source="tacamuri_icoana.svg"
-                                       HeightRequest="20"/>
+                                           Grid.Column="0"
+                                           Source="tacamuri_icoana.svg"
+                                           HeightRequest="20"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="1"
-                                       Text="Avocado"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="{Binding Inregistrare1.DenumireAliment}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="2"
-                                       Text="130 g"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare1.CantitateConsumata,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="Calorii:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Calorii:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="2"
-                                       Text="208 kcal"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare1.CaloriiConsumate,
+                                                  StringFormat='{0:G} kcal'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="Grăsimi:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Grăsimi:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="2"
-                                       Text="20 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare1.GrasimiConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="1"
-                                       Text="Glucide:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Glucide:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="2"
-                                       Text="12 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare1.GlucideConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="1"
-                                       Text="Proteine:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Proteine:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="2"
-                                       Text="3 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare1.ProteineConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
                                 </Grid>
 
-                                <Grid Grid.Row="1">
+                                <Grid Grid.Row="1"
+                                      IsVisible="{Binding ExistaDouaInregistrari}">
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
@@ -522,97 +551,104 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Grid.Row="0"
-                                       Grid.Column="0"
-                                       Source="tacamuri_icoana.svg"
-                                       HeightRequest="20"/>
+                                           Grid.Column="0"
+                                           Source="tacamuri_icoana.svg"
+                                           HeightRequest="20"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="1"
-                                       Text="Avocado"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="{Binding Inregistrare2.DenumireAliment}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="2"
-                                       Text="130 g"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare2.CantitateConsumata,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="Calorii:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Calorii:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="2"
-                                       Text="208 kcal"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare2.CaloriiConsumate,
+                                                  StringFormat='{0:G} kcal'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="Grăsimi:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Grăsimi:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="2"
-                                       Text="20 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare2.GrasimiConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="1"
-                                       Text="Glucide:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Glucide:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="2"
-                                       Text="12 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare2.GlucideConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="1"
-                                       Text="Proteine:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Proteine:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="2"
-                                       Text="3 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare2.ProteineConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
                                 </Grid>
 
-                                <Grid Grid.Row="2">
+                                <Grid Grid.Row="2"
+                                      IsVisible="{Binding ExistaTreiInregistrari}">
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
@@ -628,109 +664,117 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Grid.Row="0"
-                                       Grid.Column="0"
-                                       Source="tacamuri_icoana.svg"
-                                       HeightRequest="20"/>
+                                           Grid.Column="0"
+                                           Source="tacamuri_icoana.svg"
+                                           HeightRequest="20"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="1"
-                                       Text="Avocado"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="{Binding Inregistrare3.DenumireAliment}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="0"
-                                       Grid.Column="2"
-                                       Text="130 g"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare3.CantitateConsumata,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="12"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="Calorii:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Calorii:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="1"
-                                       Grid.Column="2"
-                                       Text="208 kcal"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare3.CaloriiConsumate,
+                                                  StringFormat='{0:G} kcal'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="1"
-                                       Text="Grăsimi:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Grăsimi:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="2"
-                                       Grid.Column="2"
-                                       Text="20 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare3.GrasimiConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="1"
-                                       Text="Glucide:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Glucide:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="3"
-                                       Grid.Column="2"
-                                       Text="12 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare3.GlucideConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="1"
-                                       Text="Proteine:"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="1"
+                                           Text="Proteine:"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           Padding="5,0"/>
 
                                     <Label Grid.Row="4"
-                                       Grid.Column="2"
-                                       Text="3 g"
-                                       TextColor="White"
-                                       FontSize="10"
-                                       VerticalTextAlignment="Center"
-                                       HorizontalTextAlignment="Center"
-                                       Padding="5,0"/>
+                                           Grid.Column="2"
+                                           Text="{Binding Inregistrare3.ProteineConsumate,
+                                                  StringFormat='{0:G} g'}"
+                                           TextColor="White"
+                                           FontSize="10"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Padding="5,0"/>
                                 </Grid>
                             </Grid>
                             <!--#endregion-->
 
-                            <ImageButton Source="mai_multe_icoana.svg"
+                            <ImageButton x:Name="butonMaiMulteInregistrari"
+                                         Source="mai_multe_icoana.svg"
                                          HeightRequest="30"
                                          Clicked="BtnMaiMulte_Clicked"
-                                         HorizontalOptions="End"/>
+                                         HorizontalOptions="End"
+                                         IsEnabled="{Binding ExistaMaiMultDeTreiInregistrari}"
+                                         IsVisible="{Binding ExistaMaiMultDeTreiInregistrari}"/>
 
                             <Label Text="Nu există înregistrări pe astăzi"
                                    TextColor="White"
                                    HorizontalTextAlignment="Center"
                                    Margin="15,20,15,10"
-                                   IsEnabled="False"
-                                   IsVisible="False"/>
+                                   IsEnabled="{Binding NuExistaInregistrari}"
+                                   IsVisible="{Binding NuExistaInregistrari}"/>
                         </VerticalStackLayout>
                     </Frame>
                     <!--#endregion-->

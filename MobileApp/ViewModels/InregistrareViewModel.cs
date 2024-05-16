@@ -42,9 +42,13 @@ public class InregistrareViewModel : INotifyPropertyChanged
         }
         else if (ConexiuneHttps.Raspuns.Content.ReadAsStringAsync().Result
                 .Equals("\"Acest nume de utilizator exista deja\""))
+        {
             AfiseazaMesajUtilizatorExistent();
+        }
         else
+        {
             AfiseazaMesajInregistrareInvalida();
+        }
     }
 
     private uint CalculeazaNecesarCaloric()

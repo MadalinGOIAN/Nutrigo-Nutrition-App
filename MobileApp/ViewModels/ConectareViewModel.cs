@@ -27,12 +27,18 @@ public class ConectareViewModel : INotifyPropertyChanged
             esteConectareUtilizator: true);
 
         if (ConexiuneHttps.Raspuns.IsSuccessStatusCode)
-            Application.Current.MainPage = new PaginaPrincipala();
+        {
+            Application.Current.MainPage = new PaginaPrincipala(NumeUtilizator);
+        }
         else if (ConexiuneHttps.Raspuns.Content.ReadAsStringAsync().Result
                 .Equals("\"Utilizatorul este deja conectat\""))
+        {
             AfiseazaMesajUtilizatorDejaConectat();
+        }
         else
+        {
             AfiseazaMesajConectareInvalida();
+        }
     }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };

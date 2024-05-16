@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using MobileApp.ViewModels;
+﻿using MobileApp.ViewModels;
 
 namespace MobileApp.Views;
 

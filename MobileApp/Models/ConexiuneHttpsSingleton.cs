@@ -24,6 +24,12 @@ public sealed class ConexiuneHttpsSingleton
         EsteTokenSalvat = false;
     }
 
+    public async Task TrimiteCerereHttpGetAsincron(string uriCerere)
+    {
+        AdaugaAntetAutorizare();
+        Raspuns = await Client.GetAsync(uriCerere);
+    }
+
     public async Task TrimiteCerereHttpPostAsincron<Schema>(
         string uriCerere,
         Schema valori,
