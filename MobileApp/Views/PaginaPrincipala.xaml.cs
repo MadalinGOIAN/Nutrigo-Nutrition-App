@@ -16,6 +16,8 @@ public partial class PaginaPrincipala : ContentPage
             () => DisplayAlert("Eroare", "Eroare la obținerea informațiilor despre utilizator", "Ok");
         PrincipalaViewModel.AfiseazaMesajObtinereIstoricNereusita +=
             () => DisplayAlert("Eroare", "Eroare la obținerea istoricului", "Ok");
+        PrincipalaViewModel.AfiseazaMesajDeconectareNereusita +=
+            () => DisplayAlert("Eroare", "Eroare la deconectare", "Ok");
 
         BindingContext = PrincipalaViewModel;
         InitializeComponent();
@@ -42,7 +44,7 @@ public partial class PaginaPrincipala : ContentPage
 
     private void BtnDeconectare_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaConectare();
+        PrincipalaViewModel.ComandaDeconectare.Execute(null);
     }
 
     private void BtnProfil_Clicked(object sender, EventArgs e)

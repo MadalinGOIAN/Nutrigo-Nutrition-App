@@ -49,6 +49,15 @@ public sealed class ConexiuneHttpsSingleton
         }
     }
 
+    public async Task TrimiteCerereHttpDeleteAsincron(string uriCerere, bool esteDeconectare)
+    {
+        AdaugaAntetAutorizare();
+        Raspuns = await Client.DeleteAsync(uriCerere);
+
+        if (esteDeconectare)
+            StergeAntetAutorizare();
+    }
+
     private void AdaugaAntetAutorizare()
     {
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
@@ -58,6 +67,12 @@ public sealed class ConexiuneHttpsSingleton
     {
         string tokenNeprelucrat = await Raspuns.Content.ReadAsStringAsync();
         Token = tokenNeprelucrat.Trim('"');
+    }
+
+    private void StergeAntetAutorizare()
+    {
+        Client.DefaultRequestHeaders.Remove("Authorization");
+        EsteTokenSalvat = false;
     }
 
     public HttpClient Client { get; private set; }

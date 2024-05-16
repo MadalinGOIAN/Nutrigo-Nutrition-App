@@ -1,4 +1,5 @@
 ﻿using MobileApp.Models;
+using MobileApp.Views;
 using System.ComponentModel;
 using System.Text.Json;
 using System.Windows.Input;
@@ -13,6 +14,7 @@ public class PrincipalaViewModel : INotifyPropertyChanged
         ConexiuneHttps = ConexiuneHttpsSingleton.ObtineInstanta();
         ComandaObtinereInfoUtilizator = new Command(ObtineInfoUtilizator);
         ComandaObtinereIstoricZiCurenta = new Command(ObtineIstoricZiCurenta);
+        ComandaDeconectare = new Command(DeconecteazaUtilizator);
     }
 
     private async void ObtineInfoUtilizator()
@@ -145,11 +147,30 @@ public class PrincipalaViewModel : INotifyPropertyChanged
         }
     }
 
+    private async void DeconecteazaUtilizator()
+    {
+        await ConexiuneHttps.TrimiteCerereHttpDeleteAsincron(
+            uriCerere: $"api/utilizatori/conectare/{NumeUtilizator}",
+            esteDeconectare: true);
+
+        if (ConexiuneHttps.Raspuns.IsSuccessStatusCode)
+        {
+            Application.Current.MainPage = new PaginaConectare();
+        }
+        else
+        {
+            AfiseazaMesajDeconectareNereusita();
+        }
+    }
+
+
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaObtinereInfoUtilizator { get; private set; }
     public ICommand ComandaObtinereIstoricZiCurenta { get; private set; }
+    public ICommand ComandaDeconectare { get; private set; }
     public Action AfiseazaMesajObtinereInfoNereusita { get; set; }
     public Action AfiseazaMesajObtinereIstoricNereusita { get; set; }
+    public Action AfiseazaMesajDeconectareNereusita { get; set; }
     public Macronutrienti Macronutrienti { get; set; }
     public List<Istoric> IstoricZiCurenta { get; set; }
     public Istoric Inregistrare1 { get; set; }
