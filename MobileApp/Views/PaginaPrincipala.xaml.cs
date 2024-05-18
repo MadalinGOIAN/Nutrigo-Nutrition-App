@@ -49,7 +49,7 @@ public partial class PaginaPrincipala : ContentPage
 
     private void BtnProfil_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaProfil();
+        PrincipalaViewModel.ComandaProfil.Execute(null);
     }
 
     private void BtnAdaugareAliment_Clicked(object sender, EventArgs e)

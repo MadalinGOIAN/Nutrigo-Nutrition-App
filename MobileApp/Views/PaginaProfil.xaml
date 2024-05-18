@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaProfil"
              Title="PaginaProfil"
-             BackgroundColor="#3E57B2">
-    
+             BackgroundColor="#3E57B2"
+             Loaded="ContentPage_Loaded">
+
     <VerticalStackLayout>
         <!--#region Bara-->
         <Frame CornerRadius="0"
@@ -34,7 +35,7 @@
                Padding="20,15">
 
             <VerticalStackLayout>
-                <Label Text="Username"
+                <Label Text="{Binding Utilizator.NumeUtilizator}"
                        TextColor="White"
                        FontSize="22"
                        HorizontalTextAlignment="Center"
@@ -65,7 +66,7 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="Mădălin-Florin"
+                        <Label Text="{Binding Utilizator.Prenume}"
                                TextColor="White"/>
                     </VerticalStackLayout>
 
@@ -76,7 +77,7 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="Goian"
+                        <Label Text="{Binding Utilizator.NumeFamilie}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -87,7 +88,7 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="Masculin"
+                        <Label Text="{Binding Utilizator.Sex}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -98,7 +99,7 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="22"
+                        <Label Text="{Binding Utilizator.Varsta}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -109,7 +110,8 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="177 cm"
+                        <Label Text="{Binding Utilizator.Inaltime,
+                                      StringFormat='{0:G} cm'}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -120,7 +122,8 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="76 kg"
+                        <Label Text="{Binding Utilizator.Greutate,
+                                      StringFormat='{0:G} kg'}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -131,7 +134,7 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="Moderat"
+                        <Label Text="{Binding Utilizator.NivelActivitateFizica}"
                                TextColor="White"/>
                     </VerticalStackLayout>
                     
@@ -142,7 +145,8 @@
                                TextColor="White"
                                FontSize="10"/>
 
-                        <Label Text="2100 kcal"
+                        <Label Text="{Binding Utilizator.NecesarCaloric,
+                                      StringFormat='{0:G} kcal'}"
                                TextColor="White"/>
                     </VerticalStackLayout>
 

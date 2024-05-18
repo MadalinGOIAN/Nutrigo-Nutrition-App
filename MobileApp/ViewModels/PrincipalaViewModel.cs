@@ -15,6 +15,7 @@ public class PrincipalaViewModel : INotifyPropertyChanged
         ComandaObtinereInfoUtilizator = new Command(ObtineInfoUtilizator);
         ComandaObtinereIstoricZiCurenta = new Command(ObtineIstoricZiCurenta);
         ComandaDeconectare = new Command(DeconecteazaUtilizator);
+        ComandaProfil = new Command(MergiLaProfil);
     }
 
     private async void ObtineInfoUtilizator()
@@ -163,11 +164,16 @@ public class PrincipalaViewModel : INotifyPropertyChanged
         }
     }
 
+    private void MergiLaProfil()
+    {
+        Application.Current.MainPage = new PaginaProfil(NumeUtilizator);
+    }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaObtinereInfoUtilizator { get; private set; }
     public ICommand ComandaObtinereIstoricZiCurenta { get; private set; }
     public ICommand ComandaDeconectare { get; private set; }
+    public ICommand ComandaProfil { get; private set; }
     public Action AfiseazaMesajObtinereInfoNereusita { get; set; }
     public Action AfiseazaMesajObtinereIstoricNereusita { get; set; }
     public Action AfiseazaMesajDeconectareNereusita { get; set; }
