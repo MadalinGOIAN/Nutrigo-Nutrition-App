@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace MobileApp.ViewModels;
 
-public class ProfilViewModel :INotifyPropertyChanged
+public class ProfilViewModel : INotifyPropertyChanged
 {
     public ProfilViewModel(string numeUtilizator)
     {
@@ -14,6 +14,7 @@ public class ProfilViewModel :INotifyPropertyChanged
         ConexiuneHttps = ConexiuneHttpsSingleton.ObtineInstanta();
         ComandaObtinereInfoUtilizator = new Command(ObtineInfoUtilizator);
         ComandaIntoarcereLaPaginaPrincipala = new Command(IntoarceLaPaginaPrincipala);
+        ComandaEditareProfil = new Command(MergiLaEditareProfil);
     }
 
     private async void ObtineInfoUtilizator()
@@ -37,10 +38,16 @@ public class ProfilViewModel :INotifyPropertyChanged
     {
         Application.Current.MainPage = new PaginaPrincipala(NumeUtilizator);
     }
+    
+    private void MergiLaEditareProfil()
+    {
+        Application.Current.MainPage = new PaginaEditareProfil(Utilizator);
+    }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaObtinereInfoUtilizator { get; private set; }
     public ICommand ComandaIntoarcereLaPaginaPrincipala { get; private set; }
+    public ICommand ComandaEditareProfil { get; private set; }
     public Action AfiseazaMesajObtinereInfoNereusita { get; set; }
     public Utilizator Utilizator { get; set; }
     private string NumeUtilizator { get; init; }

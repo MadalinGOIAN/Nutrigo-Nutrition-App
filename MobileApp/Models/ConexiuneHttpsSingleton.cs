@@ -49,6 +49,16 @@ public sealed class ConexiuneHttpsSingleton
         }
     }
 
+    public async Task TrimiteCerereHttpPutAsincron<Schema>(
+        string uriCerere,
+        Schema valori)
+    {
+        AdaugaAntetAutorizare();
+        string json = JsonSerializer.Serialize(valori);
+        var continut = new StringContent(json, Encoding.UTF8, "application/json");
+        Raspuns = await Client.PutAsync(uriCerere, continut);
+    }
+
     public async Task TrimiteCerereHttpDeleteAsincron(string uriCerere, bool esteDeconectare)
     {
         AdaugaAntetAutorizare();

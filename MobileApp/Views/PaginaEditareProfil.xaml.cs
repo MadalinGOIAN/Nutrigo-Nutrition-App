@@ -1,3 +1,6 @@
+using MobileApp.Models;
+using MobileApp.ViewModels;
+
 namespace MobileApp.Views;
 
 public partial class PaginaEditareProfil : ContentPage
@@ -6,14 +9,26 @@ public partial class PaginaEditareProfil : ContentPage
 	{
 		InitializeComponent();
 	}
+    
+    public PaginaEditareProfil(Utilizator utilizator)
+	{
+        EditareProfilViewModel = new EditareProfilViewModel(utilizator);
+        EditareProfilViewModel.AfiseazaMesajActualizareNereusita +=
+            () => DisplayAlert("Eroare", "Eroare la salvarea modificãrilor", "Ok");
+
+        BindingContext = EditareProfilViewModel;
+		InitializeComponent();
+	}
+
+    private EditareProfilViewModel EditareProfilViewModel { get; init; }
 
     private void BtnIntoarcere_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaProfil();
+        EditareProfilViewModel.ComandaIntoarcereLaPaginaProfil.Execute(null);
     }
 
     private void BtnSalvare_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaProfil();
+        EditareProfilViewModel.ComandaActualizareUtilizator.Execute(null);
     }
 }

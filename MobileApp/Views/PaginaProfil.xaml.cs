@@ -28,7 +28,7 @@ public partial class PaginaProfil : ContentPage
 
     private void BtnEditareProfil_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaEditareProfil();
+        ProfilViewModel.ComandaEditareProfil.Execute(null);
     }
 
     private void BtnIstoric_Clicked(object sender, EventArgs e)
