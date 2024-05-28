@@ -15,6 +15,7 @@ public class ProfilViewModel : INotifyPropertyChanged
         ComandaObtinereInfoUtilizator = new Command(ObtineInfoUtilizator);
         ComandaIntoarcereLaPaginaPrincipala = new Command(IntoarceLaPaginaPrincipala);
         ComandaEditareProfil = new Command(MergiLaEditareProfil);
+        ComandaIstoric = new Command(MergiLaIstoric);
     }
 
     private async void ObtineInfoUtilizator()
@@ -43,11 +44,17 @@ public class ProfilViewModel : INotifyPropertyChanged
     {
         Application.Current.MainPage = new PaginaEditareProfil(Utilizator);
     }
+    
+    private void MergiLaIstoric()
+    {
+        Application.Current.MainPage = new PaginaIstoric(Utilizator.NumeUtilizator);
+    }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaObtinereInfoUtilizator { get; private set; }
     public ICommand ComandaIntoarcereLaPaginaPrincipala { get; private set; }
     public ICommand ComandaEditareProfil { get; private set; }
+    public ICommand ComandaIstoric { get; private set; }
     public Action AfiseazaMesajObtinereInfoNereusita { get; set; }
     public Utilizator Utilizator { get; set; }
     private string NumeUtilizator { get; init; }

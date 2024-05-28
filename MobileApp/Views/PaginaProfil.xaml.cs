@@ -33,7 +33,7 @@ public partial class PaginaProfil : ContentPage
 
     private void BtnIstoric_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaIstoric();
+        ProfilViewModel.ComandaIstoric.Execute(null);
     }
 
     private void ContentPage_Loaded(object sender, EventArgs e)

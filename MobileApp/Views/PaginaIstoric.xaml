@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.PaginaIstoric"
              Title="PaginaIstoric"
-             BackgroundColor="#3E57B2">
+             BackgroundColor="#3E57B2"
+             Loaded="ContentPage_Loaded">
 
     <VerticalStackLayout>
         <!--#region Bara-->
@@ -43,17 +44,20 @@
                     </Grid.ColumnDefinitions>
 
                     <ImageButton Grid.Column="0"
-                                 Source="data_inapoi_icoana.svg"/>
+                                 Source="data_inapoi_icoana.svg"
+                                 Clicked="BtnDataInapoi_Clicked"/>
 
                     <Label Grid.Column="1"
-                           Text="25.04.2024"
+                           Text="{Binding DataSelectata,
+                                  StringFormat='{0:dd.MM.yyyy}'}"
                            TextColor="White"
                            FontSize="18"
                            HorizontalTextAlignment="Center"
                            VerticalTextAlignment="Center"/>
 
                     <ImageButton Grid.Column="2"
-                                 Source="data_inainte_icoana.svg"/>
+                                 Source="data_inainte_icoana.svg"
+                                 Clicked="BtnDataInainte_Clicked"/>
                 </Grid>
                 <!--#endregion-->
 
@@ -67,7 +71,9 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
+                    <Grid Grid.Row="0"
+                          IsVisible="{Binding ExistaOInregistrare}">
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -89,7 +95,7 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="1"
-                               Text="Avocado"
+                               Text="{Binding Inregistrare1.DenumireAliment}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -97,7 +103,8 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="2"
-                               Text="130 g"
+                               Text="{Binding Inregistrare1.CantitateConsumata,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -114,7 +121,8 @@
 
                         <Label Grid.Row="1"
                                Grid.Column="2"
-                               Text="208 kcal"
+                               Text="{Binding Inregistrare1.CaloriiConsumate,
+                                      StringFormat='{0:G} kcal'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -131,7 +139,8 @@
 
                         <Label Grid.Row="2"
                                Grid.Column="2"
-                               Text="20 g"
+                               Text="{Binding Inregistrare1.GrasimiConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -148,7 +157,8 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="2"
-                               Text="12 g"
+                               Text="{Binding Inregistrare1.GlucideConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -165,7 +175,8 @@
 
                         <Label Grid.Row="4"
                                Grid.Column="2"
-                               Text="3 g"
+                               Text="{Binding Inregistrare1.ProteineConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -173,7 +184,9 @@
                                Padding="5,0"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1"
+                          IsVisible="{Binding ExistaDouaInregistrari}">
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -195,7 +208,7 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="1"
-                               Text="Avocado"
+                               Text="{Binding Inregistrare2.DenumireAliment}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -203,7 +216,8 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="2"
-                               Text="130 g"
+                               Text="{Binding Inregistrare2.CantitateConsumata,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -220,7 +234,8 @@
 
                         <Label Grid.Row="1"
                                Grid.Column="2"
-                               Text="208 kcal"
+                               Text="{Binding Inregistrare2.CaloriiConsumate,
+                                      StringFormat='{0:G} kcal'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -237,7 +252,8 @@
 
                         <Label Grid.Row="2"
                                Grid.Column="2"
-                               Text="20 g"
+                               Text="{Binding Inregistrare2.GrasimiConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -254,7 +270,8 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="2"
-                               Text="12 g"
+                               Text="{Binding Inregistrare2.GlucideConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -271,7 +288,8 @@
 
                         <Label Grid.Row="4"
                                Grid.Column="2"
-                               Text="3 g"
+                               Text="{Binding Inregistrare2.ProteineConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -279,7 +297,9 @@
                                Padding="5,0"/>
                     </Grid>
 
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="2"
+                          IsVisible="{Binding ExistaTreiInregistrari}">
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -301,7 +321,7 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="1"
-                               Text="Avocado"
+                               Text="{Binding Inregistrare3.DenumireAliment}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -309,7 +329,8 @@
 
                         <Label Grid.Row="0"
                                Grid.Column="2"
-                               Text="130 g"
+                               Text="{Binding Inregistrare3.CantitateConsumata,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="12"
                                VerticalTextAlignment="Center"
@@ -326,7 +347,8 @@
 
                         <Label Grid.Row="1"
                                Grid.Column="2"
-                               Text="208 kcal"
+                               Text="{Binding Inregistrare3.CaloriiConsumate,
+                                      StringFormat='{0:G} kcal'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -343,7 +365,8 @@
 
                         <Label Grid.Row="2"
                                Grid.Column="2"
-                               Text="20 g"
+                               Text="{Binding Inregistrare3.GrasimiConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -360,7 +383,8 @@
 
                         <Label Grid.Row="3"
                                Grid.Column="2"
-                               Text="12 g"
+                               Text="{Binding Inregistrare3.GlucideConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -377,7 +401,8 @@
 
                         <Label Grid.Row="4"
                                Grid.Column="2"
-                               Text="3 g"
+                               Text="{Binding Inregistrare3.ProteineConsumate,
+                                      StringFormat='{0:G} g'}"
                                TextColor="White"
                                FontSize="10"
                                VerticalTextAlignment="Center"
@@ -390,14 +415,16 @@
                 <ImageButton Source="mai_multe_icoana.svg"
                              HeightRequest="30"
                              Clicked="BtnMaiMulte_Clicked"
-                             HorizontalOptions="End"/>
+                             HorizontalOptions="End"
+                             IsEnabled="{Binding ExistaMaiMultDeTreiInregistrari}"
+                             IsVisible="{Binding ExistaMaiMultDeTreiInregistrari}"/>
 
                 <Label Text="Nu există înregistrări în acestă dată"
                        TextColor="White"
                        HorizontalTextAlignment="Center"
                        Margin="15,20,15,10"
-                       IsEnabled="False"
-                       IsVisible="False"/>
+                       IsEnabled="{Binding NuExistaInregistrari}"
+                       IsVisible="{Binding NuExistaInregistrari}"/>
             </VerticalStackLayout>
         </Frame>
     </VerticalStackLayout>
