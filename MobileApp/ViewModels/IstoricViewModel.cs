@@ -17,6 +17,7 @@ public class IstoricViewModel : INotifyPropertyChanged
         ComandaObtinereIstoric = new Command(ObtineIstoricUtilizator);
         ComandaDataDreapta = new Command(AlegeDataDinainte);
         ComandaDataStanga = new Command(AlegeDataDinapoi);
+        ComandaExtindereIstoric = new Command(ExtindeIstoric);
     }
 
     private void IntoarceLaProfil()
@@ -88,6 +89,12 @@ public class IstoricViewModel : INotifyPropertyChanged
         AfiseazaIstoricDinDataSelectata();
     }
 
+    private void ExtindeIstoric()
+    {
+        Application.Current.MainPage = new PaginaIstoricDataCalendaristica(
+            nameof(PaginaIstoric), IstoricOrdonatDupaData[DataSelectata], NumeUtilizator);
+    }
+
     private void AfiseazaIstoricDinDataSelectata()
     {
         if (IstoricOrdonatDupaData[DataSelectata].Count > 0)
@@ -156,6 +163,7 @@ public class IstoricViewModel : INotifyPropertyChanged
     public ICommand ComandaObtinereIstoric { get; private set; }
     public ICommand ComandaDataDreapta { get; private set; }
     public ICommand ComandaDataStanga { get; private set; }
+    public ICommand ComandaExtindereIstoric { get; private set; }
     public Action AfiseazaMesajObtinereIstoricNereusita { get; set; }
     public DateTime DataSelectata { get; private set; }
     public Istoric Inregistrare1 { get; set; }
