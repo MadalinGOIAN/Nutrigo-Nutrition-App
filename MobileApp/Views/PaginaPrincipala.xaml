@@ -191,7 +191,7 @@
                                        Grid.Column="2"
                                        TextColor="White"
                                        Text="{Binding SumarZi.GrasimiTotale,
-                                              StringFormat='{0:G} g'}"
+                                              StringFormat='{0:f2} g'}"
                                        FontSize="12"
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"
@@ -281,7 +281,7 @@
                                        Grid.Column="2"
                                        TextColor="White"
                                        Text="{Binding SumarZi.GlucideTotale,
-                                              StringFormat='{0:G} g'}"
+                                              StringFormat='{0:f2} g'}"
                                        FontSize="12"
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"
@@ -371,7 +371,7 @@
                                        Grid.Column="2"
                                        TextColor="White"
                                        Text="{Binding SumarZi.ProteineTotale,
-                                              StringFormat='{0:G} g'}"
+                                              StringFormat='{0:f2} g'}"
                                        FontSize="12"
                                        VerticalTextAlignment="Center"
                                        HorizontalTextAlignment="Center"

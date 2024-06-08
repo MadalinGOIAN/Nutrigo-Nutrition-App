@@ -43,11 +43,13 @@
                               VerticalOptions="Center"/>
 
                         <Entry x:Name="entryCautareAliment"
+                               Text="{Binding DenumireAliment}"
                                TextColor="#3E57B2"
                                IsSpellCheckEnabled="False"
                                Keyboard="Text"
                                Margin="5,0,0,0"
                                TextChanged="EntryCautareAliment_TextChanged"
+                               Completed="entryCautareAliment_Completed"
                                WidthRequest="190"/>
 
                         <ImageButton x:Name="btnStergereCautareAliment"
@@ -78,31 +80,104 @@
 
                 <ScrollView HeightRequest="300">
                     <VerticalStackLayout>
-                        <HorizontalStackLayout VerticalOptions="Start">
+                        <!-- 1 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment1}">
+                            
                             <Image Source="tacamuri_icoana.svg"
                                    HeightRequest="25"/>
 
-                            <Button Text="Milka Choco Jaffa"
+                            <Button Text="{Binding Aliment1.Denumire}"
                                     TextColor="White"
                                     Clicked="BtnSelectareAliment_Clicked"
                                     BackgroundColor="Transparent"/>
                         </HorizontalStackLayout>
 
-                        <HorizontalStackLayout VerticalOptions="Start">
+                        <!-- 2 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment2}">
+                            
                             <Image Source="tacamuri_icoana.svg"
                                    HeightRequest="25"/>
 
-                            <Button Text="Milka ciocolata cu lapte"
+                            <Button Text="{Binding Aliment2.Denumire}"
                                     TextColor="White"
                                     Clicked="BtnSelectareAliment_Clicked"
                                     BackgroundColor="Transparent"/>
                         </HorizontalStackLayout>
-                    
-                        <HorizontalStackLayout VerticalOptions="Start">
+
+                        <!-- 3 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment3}">
+                            
                             <Image Source="tacamuri_icoana.svg"
                                    HeightRequest="25"/>
 
-                            <Button Text="Milka ciocolata cu zmeura"
+                            <Button Text="{Binding Aliment3.Denumire}"
+                                    TextColor="White"
+                                    Clicked="BtnSelectareAliment_Clicked"
+                                    BackgroundColor="Transparent"/>
+                        </HorizontalStackLayout>
+
+                        <!-- 4 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment4}">
+                            
+                            <Image Source="tacamuri_icoana.svg"
+                                   HeightRequest="25"/>
+
+                            <Button Text="{Binding Aliment4.Denumire}"
+                                    TextColor="White"
+                                    Clicked="BtnSelectareAliment_Clicked"
+                                    BackgroundColor="Transparent"/>
+                        </HorizontalStackLayout>
+
+                        <!-- 5 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment5}">
+                            
+                            <Image Source="tacamuri_icoana.svg"
+                                   HeightRequest="25"/>
+
+                            <Button Text="{Binding Aliment5.Denumire}"
+                                    TextColor="White"
+                                    Clicked="BtnSelectareAliment_Clicked"
+                                    BackgroundColor="Transparent"/>
+                        </HorizontalStackLayout>
+
+                        <!-- 6 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment6}">
+                            <Image Source="tacamuri_icoana.svg"
+                                   HeightRequest="25"/>
+
+                            <Button Text="{Binding Aliment6.Denumire}"
+                                    TextColor="White"
+                                    Clicked="BtnSelectareAliment_Clicked"
+                                    BackgroundColor="Transparent"/>
+                        </HorizontalStackLayout>
+
+                        <!-- 7 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment7}">
+                            
+                            <Image Source="tacamuri_icoana.svg"
+                                   HeightRequest="25"/>
+
+                            <Button Text="{Binding Aliment7.Denumire}"
+                                    TextColor="White"
+                                    Clicked="BtnSelectareAliment_Clicked"
+                                    BackgroundColor="Transparent"/>
+                        </HorizontalStackLayout>
+                        
+                        <!-- 8 -->
+                        <HorizontalStackLayout VerticalOptions="Start"
+                                               IsVisible="{Binding ExistaAliment8}">
+                            
+                            <Image Source="tacamuri_icoana.svg"
+                                   HeightRequest="25"/>
+
+                            <Button Text="{Binding Aliment8.Denumire}"
                                     TextColor="White"
                                     Clicked="BtnSelectareAliment_Clicked"
                                     BackgroundColor="Transparent"/>
@@ -143,7 +218,7 @@
                         </Grid.ColumnDefinitions>
                         
                         <Label Grid.Column="0"
-                               Text="Milka Choco Jaffa" 
+                               Text="{Binding AlimentSelectat.Denumire}" 
                                FontSize="16"
                                VerticalTextAlignment="Center"
                                TextColor="#3E57B2"/>
@@ -162,6 +237,7 @@
 
                         <VerticalStackLayout>
                             <Entry TextColor="#3E57B2"
+                                   Text="{Binding Cantitate}"
                                    IsSpellCheckEnabled="False"
                                    Keyboard="Numeric"
                                    HorizontalTextAlignment="Center"
@@ -207,7 +283,7 @@
                             
                             <Label Grid.Row="1"
                                    Grid.Column="0"
-                                   Text="200 kcal"
+                                   Text="{Binding AlimentSelectat.Calorii}"
                                    TextColor="White"
                                    FontSize="12"
                                    HorizontalTextAlignment="Center"/>
@@ -221,7 +297,7 @@
                             
                             <Label Grid.Row="1"
                                    Grid.Column="1"
-                                   Text="200 g"
+                                   Text="{Binding AlimentSelectat.Grasimi}"
                                    TextColor="White"
                                    FontSize="12"
                                    HorizontalTextAlignment="Center"/>
@@ -235,7 +311,7 @@
                             
                             <Label Grid.Row="1"
                                    Grid.Column="2"
-                                   Text="200 g"
+                                   Text="{Binding AlimentSelectat.Glucide}"
                                    TextColor="White"
                                    FontSize="12"
                                    HorizontalTextAlignment="Center"/>
@@ -249,7 +325,7 @@
                             
                             <Label Grid.Row="1"
                                    Grid.Column="3"
-                                   Text="200 g"
+                                   Text="{Binding AlimentSelectat.Proteine}"
                                    TextColor="White"
                                    FontSize="12"
                                    HorizontalTextAlignment="Center"/>

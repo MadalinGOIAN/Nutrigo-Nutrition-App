@@ -54,7 +54,7 @@ public partial class PaginaPrincipala : ContentPage
 
     private void BtnAdaugareAliment_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaAdaugareAliment();
+        PrincipalaViewModel.ComandaAdaugareAliment.Execute(null);
     }
 
     private void ContentPage_Loaded(object sender, EventArgs e)

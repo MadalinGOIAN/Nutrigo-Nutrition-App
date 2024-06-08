@@ -49,7 +49,7 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
                 break;
 
             case 6:
@@ -57,8 +57,8 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
-                Inregistrare6 = Istoric.ElementAt(3); ExistaInregistrare6 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
+                Inregistrare6 = Istoric.ElementAt(5); ExistaInregistrare6 = true;
                 break;
 
             case 7:
@@ -66,9 +66,9 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
-                Inregistrare6 = Istoric.ElementAt(3); ExistaInregistrare6 = true;
-                Inregistrare7 = Istoric.ElementAt(3); ExistaInregistrare7 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
+                Inregistrare6 = Istoric.ElementAt(5); ExistaInregistrare6 = true;
+                Inregistrare7 = Istoric.ElementAt(6); ExistaInregistrare7 = true;
                 break;
 
             case 8:
@@ -76,10 +76,10 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
-                Inregistrare6 = Istoric.ElementAt(3); ExistaInregistrare6 = true;
-                Inregistrare7 = Istoric.ElementAt(3); ExistaInregistrare7 = true;
-                Inregistrare8 = Istoric.ElementAt(3); ExistaInregistrare8 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
+                Inregistrare6 = Istoric.ElementAt(5); ExistaInregistrare6 = true;
+                Inregistrare7 = Istoric.ElementAt(6); ExistaInregistrare7 = true;
+                Inregistrare8 = Istoric.ElementAt(7); ExistaInregistrare8 = true;
                 break;
 
             case 9:
@@ -87,11 +87,11 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
-                Inregistrare6 = Istoric.ElementAt(3); ExistaInregistrare6 = true;
-                Inregistrare7 = Istoric.ElementAt(3); ExistaInregistrare7 = true;
-                Inregistrare8 = Istoric.ElementAt(3); ExistaInregistrare8 = true;
-                Inregistrare9 = Istoric.ElementAt(3); ExistaInregistrare9 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
+                Inregistrare6 = Istoric.ElementAt(5); ExistaInregistrare6 = true;
+                Inregistrare7 = Istoric.ElementAt(6); ExistaInregistrare7 = true;
+                Inregistrare8 = Istoric.ElementAt(7); ExistaInregistrare8 = true;
+                Inregistrare9 = Istoric.ElementAt(8); ExistaInregistrare9 = true;
                 break;
 
             case 10:
@@ -99,12 +99,12 @@ public class IstoricDataCalendaristicaViewModel : INotifyPropertyChanged
                 Inregistrare2 = Istoric.ElementAt(1); ExistaInregistrare2 = true;
                 Inregistrare3 = Istoric.ElementAt(2); ExistaInregistrare3 = true;
                 Inregistrare4 = Istoric.ElementAt(3); ExistaInregistrare4 = true;
-                Inregistrare5 = Istoric.ElementAt(3); ExistaInregistrare5 = true;
-                Inregistrare6 = Istoric.ElementAt(3); ExistaInregistrare6 = true;
-                Inregistrare7 = Istoric.ElementAt(3); ExistaInregistrare7 = true;
-                Inregistrare8 = Istoric.ElementAt(3); ExistaInregistrare8 = true;
-                Inregistrare9 = Istoric.ElementAt(3); ExistaInregistrare9 = true;
-                Inregistrare10 = Istoric.ElementAt(3); ExistaInregistrare10 = true;
+                Inregistrare5 = Istoric.ElementAt(4); ExistaInregistrare5 = true;
+                Inregistrare6 = Istoric.ElementAt(5); ExistaInregistrare6 = true;
+                Inregistrare7 = Istoric.ElementAt(6); ExistaInregistrare7 = true;
+                Inregistrare8 = Istoric.ElementAt(7); ExistaInregistrare8 = true;
+                Inregistrare9 = Istoric.ElementAt(8); ExistaInregistrare9 = true;
+                Inregistrare10 = Istoric.ElementAt(9); ExistaInregistrare10 = true;
                 break;
         }
     }

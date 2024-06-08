@@ -17,6 +17,7 @@ public class PrincipalaViewModel : INotifyPropertyChanged
         ComandaDeconectare = new Command(DeconecteazaUtilizator);
         ComandaProfil = new Command(MergiLaProfil);
         ComandaExtindereIstoric = new Command(ExtindeIstoric);
+        ComandaAdaugareAliment = new Command(MergiLaAdaugareAliment);
     }
 
     private async void ObtineInfoUtilizator()
@@ -169,6 +170,11 @@ public class PrincipalaViewModel : INotifyPropertyChanged
     {
         Application.Current.MainPage = new PaginaProfil(NumeUtilizator);
     }
+    
+    private void MergiLaAdaugareAliment()
+    {
+        Application.Current.MainPage = new PaginaAdaugareAliment(NumeUtilizator);
+    }
 
     private void ExtindeIstoric()
     {
@@ -182,6 +188,7 @@ public class PrincipalaViewModel : INotifyPropertyChanged
     public ICommand ComandaDeconectare { get; private set; }
     public ICommand ComandaProfil { get; private set; }
     public ICommand ComandaExtindereIstoric { get; private set; }
+    public ICommand ComandaAdaugareAliment { get; private set; }
     public Action AfiseazaMesajObtinereInfoNereusita { get; set; }
     public Action AfiseazaMesajObtinereIstoricNereusita { get; set; }
     public Action AfiseazaMesajDeconectareNereusita { get; set; }

@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Alerts;
+﻿using MobileApp.ViewModels;
 
 namespace MobileApp.Views;
 
@@ -14,10 +14,30 @@ public partial class PaginaAdaugareAliment : ContentPage
             gridAlimentSelectat.IsVisible = true;
         }
 	}
+    
+    public PaginaAdaugareAliment(string numeUtilizator, bool sectiuneAlimentSelectatDeschisa = false)
+	{
+        AdaugareAlimentViewModel = new AdaugareAlimentViewModel(numeUtilizator);
+        AdaugareAlimentViewModel.AfiseazaMesajObtinereAlimenteNereusita +=
+            () => DisplayAlert("Eroare", "Eroare la obținerea alimentelor", "Ok");
+        AdaugareAlimentViewModel.AfiseazaMesajAdaugareNereusita +=
+            () => DisplayAlert("Eroare", "Eroare la adăugarea alimentului", "Ok");
+
+        BindingContext = AdaugareAlimentViewModel;
+        InitializeComponent();
+
+        if (sectiuneAlimentSelectatDeschisa)
+        {
+            gridAlimentSelectat.IsEnabled = true;
+            gridAlimentSelectat.IsVisible = true;
+        }
+	}
+
+    private AdaugareAlimentViewModel AdaugareAlimentViewModel { get; init; }
 
     private void BtnIntoarcere_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaPrincipala();
+        AdaugareAlimentViewModel.ComandaIntoarcereLaPaginaPrincipala.Execute(null);
     }
 
     private void EntryCautareAliment_TextChanged(object sender, TextChangedEventArgs e)
@@ -37,6 +57,7 @@ public partial class PaginaAdaugareAliment : ContentPage
     private void btnStergereCautareAliment_Clicked(object sender, EventArgs e)
     {
         entryCautareAliment.Text = "";
+        AdaugareAlimentViewModel.ComandaAscundereRezultate.Execute(null);
     }
 
     private void BtnCreareAliment_Clicked(object sender, EventArgs e)
@@ -59,11 +80,20 @@ public partial class PaginaAdaugareAliment : ContentPage
     {
         gridAlimentSelectat.IsEnabled = true;
         gridAlimentSelectat.IsVisible = true;
+
+        AdaugareAlimentViewModel.CompleteazaCampAlimentSelectat((sender as Button).Text);
     }
 
     private async void BtnConfirmareAdaugareAliment_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaPrincipala();
-        await Toast.Make("Alimentul a fost ad�ugat", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+        gridAlimentSelectat.IsEnabled = false;
+        gridAlimentSelectat.IsVisible = false;
+
+        AdaugareAlimentViewModel.ComandaAdaugareInregistrareInIstoric.Execute(null);
+    }
+
+    private void entryCautareAliment_Completed(object sender, EventArgs e)
+    {
+        AdaugareAlimentViewModel.ComandaCautareAliment.Execute(null);
     }
 }
