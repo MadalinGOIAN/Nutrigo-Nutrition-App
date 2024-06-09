@@ -34,6 +34,7 @@
                            BarCodeDetectionEnabled="True"
                            CamerasLoaded="cameraView_CamerasLoaded"
                            BarcodeDetected="cameraView_BarcodeDetected"
-                           Margin="0,100"/>
+                           Margin="0,100"
+                           ControlBarcodeResultDuplicate="True"/>
     </VerticalStackLayout>
 </ContentPage>

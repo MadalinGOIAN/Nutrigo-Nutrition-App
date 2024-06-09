@@ -1,6 +1,6 @@
 using Camera.MAUI;
 using Camera.MAUI.ZXing;
-using CommunityToolkit.Maui.Alerts;
+using MobileApp.ViewModels;
 
 namespace MobileApp.Views;
 
@@ -8,7 +8,6 @@ public partial class PaginaScanareCodBare : ContentPage
 {
 	public PaginaScanareCodBare(string paginaAnterioara)
 	{
-        PaginaAnterioara = paginaAnterioara;
 		InitializeComponent();
 
         cameraView.BarCodeDecoder = new ZXingBarcodeDecoder();
@@ -17,19 +16,28 @@ public partial class PaginaScanareCodBare : ContentPage
             PossibleFormats = { BarcodeFormat.EAN_13, BarcodeFormat.EAN_8 }
         };
 	}
+    
+    public PaginaScanareCodBare(string paginaAnterioara, string numeUtilizator)
+	{
+        ScanareCodBareViewModel = new ScanareCodBareViewModel(paginaAnterioara, numeUtilizator);
+        ScanareCodBareViewModel.AfiseazaMesajAlimentNegasit +=
+            () => DisplayAlert("Aliment inexistent", "Alimentul nu a fost gãsit", "Ok");
+
+        BindingContext = ScanareCodBareViewModel;
+        InitializeComponent();
+
+        cameraView.BarCodeDecoder = new ZXingBarcodeDecoder();
+        cameraView.BarCodeOptions = new BarcodeDecodeOptions
+        {
+            PossibleFormats = { BarcodeFormat.EAN_13, BarcodeFormat.EAN_8 }
+        };
+	}
+
+    private ScanareCodBareViewModel ScanareCodBareViewModel { get; init; }
 
     private void BtnIntoarcere_Clicked(object sender, EventArgs e)
     {
-        switch (PaginaAnterioara)
-        {
-            case nameof(PaginaAdaugareAliment):
-                Application.Current.MainPage = new PaginaAdaugareAliment();
-                break;
-
-            case nameof(PaginaAlimentNou):
-                Application.Current.MainPage = new PaginaAlimentNou();
-                break;
-        }
+        ScanareCodBareViewModel.ComandaIntoarcereLaPaginaAnterioara.Execute(null);
     }
 
     private void cameraView_CamerasLoaded(object sender, EventArgs e)
@@ -49,21 +57,9 @@ public partial class PaginaScanareCodBare : ContentPage
 
     private void cameraView_BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
-        MainThread.BeginInvokeOnMainThread(async () =>
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            switch (PaginaAnterioara)
-            {
-                case nameof(PaginaAdaugareAliment):
-                    Application.Current.MainPage = new PaginaAdaugareAliment(sectiuneAlimentSelectatDeschisa: true);
-                    break;
-
-                case nameof(PaginaAlimentNou):
-                    Application.Current.MainPage = new PaginaAdaugareAliment();
-                    await Toast.Make("Aliment creat cu succes", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
-                    break;
-            }
+            ScanareCodBareViewModel.ExtrageCodBare(args.Result.FirstOrDefault().Text);
         });
     }
-
-    private string PaginaAnterioara { get; init; }
 }

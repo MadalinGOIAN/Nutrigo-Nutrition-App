@@ -9,14 +9,16 @@ namespace MobileApp.ViewModels;
 
 public class AdaugareAlimentViewModel : INotifyPropertyChanged
 {
-    public AdaugareAlimentViewModel(string numeUtilizator)
+    public AdaugareAlimentViewModel(string numeUtilizator, Aliment? alimentSelectat = null)
     {
         NumeUtilizator = numeUtilizator;
+        AlimentSelectat = alimentSelectat;
         ConexiuneHttps = ConexiuneHttpsSingleton.ObtineInstanta();
         ComandaIntoarcereLaPaginaPrincipala = new Command(IntoarceLaPaginaPrincipala);
         ComandaCautareAliment = new Command(CautaAliment);
         ComandaAscundereRezultate = new Command(AscundeRezultate);
         ComandaAdaugareInregistrareInIstoric = new Command(AdaugaInregistrareInIstoric);
+        ComandaScanareCodBare = new Command(MergiLaScanareCodBare);
     }
 
     private void IntoarceLaPaginaPrincipala()
@@ -174,11 +176,17 @@ public class AdaugareAlimentViewModel : INotifyPropertyChanged
         return valori * float.Parse(Cantitate) / 100f;
     }
 
+    private void MergiLaScanareCodBare()
+    {
+        Application.Current.MainPage = new PaginaScanareCodBare(nameof(PaginaAdaugareAliment), NumeUtilizator);
+    }
+
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaIntoarcereLaPaginaPrincipala { get; private set; }
     public ICommand ComandaCautareAliment { get; private set; }
     public ICommand ComandaAscundereRezultate { get; private set; }
     public ICommand ComandaAdaugareInregistrareInIstoric { get; private set; }
+    public ICommand ComandaScanareCodBare { get; private set; }
     public Action AfiseazaMesajObtinereAlimenteNereusita { get; set; }
     public Action AfiseazaMesajAdaugareNereusita { get; set; }
     private List<Aliment> AlimenteGasite { get; set; }

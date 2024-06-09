@@ -1,4 +1,5 @@
-﻿using MobileApp.ViewModels;
+﻿using MobileApp.Models;
+using MobileApp.ViewModels;
 
 namespace MobileApp.Views;
 
@@ -15,16 +16,24 @@ public partial class PaginaAdaugareAliment : ContentPage
         }
 	}
     
-    public PaginaAdaugareAliment(string numeUtilizator, bool sectiuneAlimentSelectatDeschisa = false)
+    public PaginaAdaugareAliment(
+        string numeUtilizator,
+        Aliment? alimentSelectat = null,
+        bool sectiuneAlimentSelectatDeschisa = false)
 	{
-        AdaugareAlimentViewModel = new AdaugareAlimentViewModel(numeUtilizator);
+        InitializeComponent();
+
+        if (sectiuneAlimentSelectatDeschisa)
+            AdaugareAlimentViewModel = new AdaugareAlimentViewModel(numeUtilizator, alimentSelectat);
+        else
+            AdaugareAlimentViewModel = new AdaugareAlimentViewModel(numeUtilizator);
+
         AdaugareAlimentViewModel.AfiseazaMesajObtinereAlimenteNereusita +=
             () => DisplayAlert("Eroare", "Eroare la obținerea alimentelor", "Ok");
         AdaugareAlimentViewModel.AfiseazaMesajAdaugareNereusita +=
             () => DisplayAlert("Eroare", "Eroare la adăugarea alimentului", "Ok");
 
         BindingContext = AdaugareAlimentViewModel;
-        InitializeComponent();
 
         if (sectiuneAlimentSelectatDeschisa)
         {
@@ -67,7 +76,7 @@ public partial class PaginaAdaugareAliment : ContentPage
 
     private void BtnScanareCodBare_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaScanareCodBare(nameof(PaginaAdaugareAliment));
+        AdaugareAlimentViewModel.ComandaScanareCodBare.Execute(null);
     }
 
     private void BtnIesireAlimentSelectat_Clicked(object sender, EventArgs e)
