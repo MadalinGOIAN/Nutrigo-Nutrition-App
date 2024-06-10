@@ -19,6 +19,7 @@ public class AdaugareAlimentViewModel : INotifyPropertyChanged
         ComandaAscundereRezultate = new Command(AscundeRezultate);
         ComandaAdaugareInregistrareInIstoric = new Command(AdaugaInregistrareInIstoric);
         ComandaScanareCodBare = new Command(MergiLaScanareCodBare);
+        ComandaAlimentNou = new Command(MergiLaAlimentNou);
     }
 
     private void IntoarceLaPaginaPrincipala()
@@ -180,6 +181,11 @@ public class AdaugareAlimentViewModel : INotifyPropertyChanged
     {
         Application.Current.MainPage = new PaginaScanareCodBare(nameof(PaginaAdaugareAliment), NumeUtilizator);
     }
+    
+    private void MergiLaAlimentNou()
+    {
+        Application.Current.MainPage = new PaginaAlimentNou(NumeUtilizator);
+    }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaIntoarcereLaPaginaPrincipala { get; private set; }
@@ -187,6 +193,7 @@ public class AdaugareAlimentViewModel : INotifyPropertyChanged
     public ICommand ComandaAscundereRezultate { get; private set; }
     public ICommand ComandaAdaugareInregistrareInIstoric { get; private set; }
     public ICommand ComandaScanareCodBare { get; private set; }
+    public ICommand ComandaAlimentNou { get; private set; }
     public Action AfiseazaMesajObtinereAlimenteNereusita { get; set; }
     public Action AfiseazaMesajAdaugareNereusita { get; set; }
     private List<Aliment> AlimenteGasite { get; set; }

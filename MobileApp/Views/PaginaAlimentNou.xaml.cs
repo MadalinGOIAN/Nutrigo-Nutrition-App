@@ -1,27 +1,26 @@
-using CommunityToolkit.Maui.Alerts;
+using MobileApp.ViewModels;
 
 namespace MobileApp.Views;
 
 public partial class PaginaAlimentNou : ContentPage
 {
-	public PaginaAlimentNou()
+	public PaginaAlimentNou(string numeUtilizator)
 	{
-		InitializeComponent();
+        AlimentNouViewModel = new AlimentNouViewModel(numeUtilizator);
+
+        BindingContext = AlimentNouViewModel;
+        InitializeComponent();
 	}
+
+    private AlimentNouViewModel AlimentNouViewModel { get; init; }
 
     private void BtnIntoarcere_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaAdaugareAliment();
+        AlimentNouViewModel.ComandaIntoarcereLaAdaugareAliment.Execute(null);
     }
 
-    private void BtnScanareCodBare_Clicked(object sender, EventArgs e)
+    private void BtnPasUrmator_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaScanareCodBare(nameof(PaginaAlimentNou));
-    }
-
-    private async void BtnSariPeste_Clicked(object sender, EventArgs e)
-    {
-        Application.Current.MainPage = new PaginaAdaugareAliment();
-        await Toast.Make("Aliment creat cu succes", CommunityToolkit.Maui.Core.ToastDuration.Long).Show();
+        
     }
 }

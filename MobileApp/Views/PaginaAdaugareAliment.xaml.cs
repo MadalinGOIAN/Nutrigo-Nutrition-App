@@ -71,7 +71,7 @@ public partial class PaginaAdaugareAliment : ContentPage
 
     private void BtnCreareAliment_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new PaginaAlimentNou();
+        AdaugareAlimentViewModel.ComandaAlimentNou.Execute(null);
     }
 
     private void BtnScanareCodBare_Clicked(object sender, EventArgs e)

@@ -26,7 +26,8 @@ public class ScanareCodBareViewModel : INotifyPropertyChanged
                 break;
 
             case nameof(PaginaAlimentNou):
-                Application.Current.MainPage = new PaginaAlimentNou(); //TODO: Don't forget to change this after MVVM adaptation
+                //TODO: Don't forget to change this after MVVM adaptation
+                // Application.Current.MainPage = new PaginaAlimentNou();
                 break;
         }
     }
