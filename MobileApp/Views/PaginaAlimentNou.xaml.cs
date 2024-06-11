@@ -21,6 +21,6 @@ public partial class PaginaAlimentNou : ContentPage
 
     private void BtnPasUrmator_Clicked(object sender, EventArgs e)
     {
-        
+        AlimentNouViewModel.ComandaPasUrmator.Execute(null);
     }
 }
