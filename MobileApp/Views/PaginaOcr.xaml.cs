@@ -7,8 +7,6 @@ public partial class PaginaOcr : ContentPage
 	public PaginaOcr(string numeUtilizator, string denumireAliment)
 	{
         OcrViewModel = new OcrViewModel(numeUtilizator, denumireAliment);
-        OcrViewModel.AfiseazaMesaj +=
-            () => DisplayAlert("", "Transmitere ok de param", "Ok");
 
         BindingContext = OcrViewModel;
         InitializeComponent();

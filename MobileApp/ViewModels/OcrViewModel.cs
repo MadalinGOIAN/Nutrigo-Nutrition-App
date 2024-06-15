@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Azure;
 using Azure.AI.Vision.ImageAnalysis;
-using System.Net;
 using System.Text.RegularExpressions;
 
 namespace MobileApp.ViewModels;
@@ -65,8 +64,8 @@ public class OcrViewModel : INotifyPropertyChanged
             }
         }
 
-        //Application.Current.MainPage = new PaginaValidareValori(
-        //    NumeUtilizator, DenumireAliment, CaloriiAliment, GrasimiAliment, GlucideAliment, ProteineAliment);
+        Application.Current.MainPage = new PaginaValidareValori(
+            NumeUtilizator, DenumireAliment, CaloriiAliment, GrasimiAliment, GlucideAliment, ProteineAliment);
     }
 
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
