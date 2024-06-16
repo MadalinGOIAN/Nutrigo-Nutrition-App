@@ -17,10 +17,11 @@ public class ValidareValoriViewModel : INotifyPropertyChanged
         NumeUtilizator = numeUtilizator;
         DenumireAliment = denumireAliment;
         CaloriiAliment = caloriiAliment;
-        GrasimiAliment = grasimiAliment;
-        GlucideAliment = glucideAliment;
-        ProteineAliment = proteineAliment;
+        GrasimiAliment = grasimiAliment.Replace(',', '.');
+        GlucideAliment = glucideAliment.Replace(',', '.');
+        ProteineAliment = proteineAliment.Replace(',', '.');
         ComandaIntoarcereLaOcr = new Command(IntoarceLaOcr);
+        ComandaScanareCodBare = new Command(MergiLaScanareCodBare);
     }
 
     private void IntoarceLaOcr()
@@ -28,8 +29,21 @@ public class ValidareValoriViewModel : INotifyPropertyChanged
         Application.Current.MainPage = new PaginaOcr(NumeUtilizator, DenumireAliment);
     }
 
+    private void MergiLaScanareCodBare()
+    {
+        Application.Current.MainPage = new PaginaScanareCodBare(
+            nameof(PaginaValidareValori),
+            NumeUtilizator,
+            DenumireAliment,
+            CaloriiAliment,
+            GrasimiAliment,
+            GlucideAliment,
+            ProteineAliment);
+    }
+
     public event PropertyChangedEventHandler PropertyChanged = delegate { };
     public ICommand ComandaIntoarcereLaOcr { get; private set; }
+    public ICommand ComandaScanareCodBare { get; private set; }
     private string NumeUtilizator { get; init; }
     private string DenumireAliment { get; init; }
     public string CaloriiAliment

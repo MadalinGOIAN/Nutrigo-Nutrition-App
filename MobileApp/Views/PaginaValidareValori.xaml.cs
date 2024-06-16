@@ -28,6 +28,6 @@ public partial class PaginaValidareValori : ContentPage
     
     private void BtnPasUrmator_Clicked(object sender, EventArgs e)
     {
-            
+        ValidareValoriViewModel.ComandaScanareCodBare.Execute(null);
     }
 }

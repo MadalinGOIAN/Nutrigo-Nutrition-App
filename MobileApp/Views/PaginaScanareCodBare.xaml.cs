@@ -6,20 +6,36 @@ namespace MobileApp.Views;
 
 public partial class PaginaScanareCodBare : ContentPage
 {
-	public PaginaScanareCodBare(string paginaAnterioara)
+	public PaginaScanareCodBare(
+        string paginaAnterioara,
+        string numeUtilizator,
+        string denumireAliment = null,
+        string caloriiAliment = null,
+        string grasimiAliment = null,
+        string glucideAliment = null,
+        string proteineAliment = null)
 	{
-		InitializeComponent();
-
-        cameraView.BarCodeDecoder = new ZXingBarcodeDecoder();
-        cameraView.BarCodeOptions = new BarcodeDecodeOptions
+        switch (paginaAnterioara)
         {
-            PossibleFormats = { BarcodeFormat.EAN_13, BarcodeFormat.EAN_8 }
-        };
-	}
-    
-    public PaginaScanareCodBare(string paginaAnterioara, string numeUtilizator)
-	{
-        ScanareCodBareViewModel = new ScanareCodBareViewModel(paginaAnterioara, numeUtilizator);
+            case nameof(PaginaAdaugareAliment):
+                ScanareCodBareViewModel = new ScanareCodBareViewModel(paginaAnterioara, numeUtilizator);
+                break;
+
+            case nameof(PaginaValidareValori):
+                ScanareCodBareViewModel = new ScanareCodBareViewModel(
+                    paginaAnterioara, 
+                    numeUtilizator, 
+                    denumireAliment, 
+                    caloriiAliment, 
+                    grasimiAliment, 
+                    glucideAliment,
+                    proteineAliment);
+
+                ScanareCodBareViewModel.AfiseazaMesajEroareAdaugareAlimentNou +=
+                    () => DisplayAlert("Eroare", "Eroare la înregistrarea alimentului", "Ok");
+                break;
+        }
+
         ScanareCodBareViewModel.AfiseazaMesajAlimentNegasit +=
             () => DisplayAlert("Aliment inexistent", "Alimentul nu a fost gãsit", "Ok");
 
